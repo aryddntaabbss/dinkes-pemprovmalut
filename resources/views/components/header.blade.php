@@ -37,6 +37,9 @@
                 <!-- Profil Content -->
                 <div class="absolute left-0 hidden mt-2 w-56 p-3 bg-white shadow-lg rounded-md group-hover:block z-50">
                     <a href="#"
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Selayang
+                        Pandang</a>
+                    <a href="#"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Visi
                         Misi</a>
                     <a href="#"
@@ -46,6 +49,8 @@
                     <a href="#"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Struktur
                         Organisasi</a>
+                    <a href="#"
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">UPTD</a>
                     <a href="#"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Profil
                         Pejabat</a>
@@ -64,14 +69,40 @@
                 <!-- Informasi Content -->
                 <div class="absolute left-0 hidden mt-2 w-56 p-3 bg-white shadow-lg rounded-md group-hover:block z-50">
                     <a href="#"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Berita
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Berita
                         dan Informasi</a>
                     <a href="#"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Tips
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Tips
                         Kesehatan</a>
-                    <a href="#"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Data
-                        Kesehatan</a>
+
+                    <!-- Data Kesehatan dengan Nested Dropdown -->
+                    <div class="relative group/nested">
+                        <a href="#"
+                            class="px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500 flex justify-between items-center">
+                            Data Kesehatan
+                            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                            </svg>
+                        </a>
+                        <!-- Nested Dropdown untuk Data Kesehatan -->
+                        <div
+                            class="absolute left-full top-0 hidden w-48 p-3 bg-white shadow-lg rounded-md group-hover/nested:block -mt-2 ml-2">
+                            <a href="#"
+                                class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Sekretariat</a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Bidang
+                                Kesmas</a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Bidang
+                                P2</a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Bidang
+                                Yankes</a>
+                            <a href="#"
+                                class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Bidang
+                                SDK</a>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -90,10 +121,6 @@
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Foto</a>
                     <a href="#"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Vidio</a>
-                    <a href="#"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Registrasi
-                        STR
-                        Online</a>
                     <a href="#"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Forum
                         Konsultasi</a>
@@ -117,8 +144,6 @@
                     <a href="#"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Tips
                         Kesehatan</a>
-                    <a href="#"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Renja</a>
                     <a href="#"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Restra</a>
                     <a href="#"
@@ -165,6 +190,9 @@
                             <!-- Profil Content -->
                             <div
                                 class="absolute left-0 hidden mt-2 p-3 w-full bg-white shadow-lg rounded-md group-hover:block z-50">
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Selayang
+                                    Pandang</a>
                                 <a href="#" class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Visi
                                     Misi</a>
                                 <a href="#"
@@ -173,6 +201,8 @@
                                 <a href="#"
                                     class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Struktur
                                     Organisasi</a>
+                                <a href="#"
+                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">UPTD</a>
                                 <a href="#"
                                     class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Profil
                                     Pejabat</a>
@@ -186,15 +216,41 @@
                                 Informasi
                             </a>
                             <!-- Informasi Content -->
-                            <div
-                                class="absolute left-0 hidden mt-2 p-3 w-full bg-white shadow-lg rounded-md group-hover:block z-50">
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Berita dan
-                                    Informasi</a>
-                                <a href="#" class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Tips
-                                    Kesehatan</a>
-                                <a href="#" class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Data
-                                    Kesehatan</a>
+                            <div class="hidden mt-2 bg-gray-50 rounded-lg p-2 group-hover:block">
+                                <a href="#" class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">
+                                    Berita dan Informasi
+                                </a>
+                                <a href="#" class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">
+                                    Tips Kesehatan
+                                </a>
+                                <!-- Data Kesehatan Dropdown -->
+                                <div class="relative">
+                                    <button onclick="toggleDataKesehatan()"
+                                        class="w-full flex justify-between items-center px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">
+                                        Data Kesehatan
+                                        <svg class="w-4 h-4 transition-transform" id="dataKesehatanIcon" fill="none"
+                                            stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M19 9l-7 7-7-7"></path>
+                                        </svg>
+                                    </button>
+                                    <div id="dataKesehatanDropdown" class="hidden pl-4 mt-1">
+                                        <a href="#"
+                                            class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Sekretariat</a>
+                                        <a href="#"
+                                            class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Bidang
+                                            Kesmas</a>
+                                        <a href="#"
+                                            class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Bidang
+                                            P2</a>
+                                        <a href="#"
+                                            class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Bidang
+                                            Yankes</a>
+                                        <a href="#"
+                                            class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Bidang
+                                            SDK</a>
+                                    </div>
+                                </div>
                             </div>
                         </div>
 
@@ -211,10 +267,6 @@
                                     class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Foto</a>
                                 <a href="#"
                                     class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Vidio</a>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Registrasi
-                                    STR
-                                    Online</a>
                                 <a href="#"
                                     class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Forum
                                     Konsultasi</a>
@@ -235,8 +287,6 @@
                                     Kesehatan</a>
                                 <a href="#" class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Tips
                                     Kesehatan</a>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Renja</a>
                                 <a href="#"
                                     class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Restra</a>
                                 <a href="#"
@@ -270,6 +320,13 @@
     closeMenuButton.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
     });
-</script>
 
-{{-- <a href="#" class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-gray-900 hover:bg-gray-50">Company</a> --}}
+// Script untuk toggle Data Kesehatan
+    function toggleDataKesehatan() {
+    const dropdown = document.getElementById('dataKesehatanDropdown');
+    const icon = document.getElementById('dataKesehatanIcon');
+    
+    dropdown.classList.toggle('hidden');
+    icon.style.transform = dropdown.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
+}
+</script>
