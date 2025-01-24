@@ -14,4 +14,7 @@
             </div>
         </div>
     </div>
+
+    @include('components.simple-tabel')
+
 </x-app-layout>

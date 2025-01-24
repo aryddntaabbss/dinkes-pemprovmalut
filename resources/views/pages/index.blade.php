@@ -5,51 +5,66 @@
 
 <section>
     <!-- Topic Nav -->
-    <nav class="w-full py-4 border-t border-b bg-gray-50" x-data="{ open: false }">
+    <nav class="w-full py-4 border-t border-b bg-gray-50"
+        x-data="{ open: false, scrollIndex: 0, itemsPerPage: 5, totalItems: {{ count($kategori) }} }">
+        <!-- Mobile Toggle Button -->
         <div class="block sm:hidden">
             <a href="#"
-                class="block md:hidden text-base font-bold uppercase text-center flex justify-center items-center text-teal-700"
+                class="text-base font-bold uppercase text-center flex justify-between items-center text-teal-700"
                 @click="open = !open">
-                Kategori Kesehatan <i :class="open ? 'fa-chevron-down': 'fa-chevron-up'" class="fas ml-2"></i>
+                Kategori Kesehatan
+                <i :class="open ? 'fa-chevron-up' : 'fa-chevron-down'" class="fas ml-2"></i>
             </a>
         </div>
-        <div :class="open ? 'block': 'hidden'" class="w-full flex-grow sm:flex sm:items-center sm:w-auto">
+
+        <!-- Desktop Navigation with Previous and Next buttons -->
+        <div :class="open ? 'block' : 'hidden'" class="w-full sm:flex sm:items-center sm:w-auto sm:px-6">
             <div
-                class="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
-                <a href="#"
-                    class="hover:bg-teal-700 hover:text-white rounded py-2 px-4 mx-2 transition-colors duration-200">Kesehatan
-                    Umum</a>
-                <a href="#"
-                    class="hover:bg-teal-700 hover:text-white rounded py-2 px-4 mx-2 transition-colors duration-200">Penyakit
-                    Menular</a>
-                <a href="#"
-                    class="hover:bg-teal-700 hover:text-white rounded py-2 px-4 mx-2 transition-colors duration-200">Gizi
-                    &
-                    Nutrisi</a>
-                <a href="#"
-                    class="hover:bg-teal-700 hover:text-white rounded py-2 px-4 mx-2 transition-colors duration-200">Kesehatan
-                    Ibu & Anak</a>
-                <a href="#"
-                    class="hover:bg-teal-700 hover:text-white rounded py-2 px-4 mx-2 transition-colors duration-200">Layanan
-                    Kesehatan</a>
-                <a href="#"
-                    class="hover:bg-teal-700 hover:text-white rounded py-2 px-4 mx-2 transition-colors duration-200">Info
-                    Vaksinasi</a>
+                class="w-full container mx-auto flex items-center justify-between sm:space-x-4 text-sm font-bold uppercase mt-2 sm:mt-0">
+
+                <!-- Previous Button (Left aligned) -->
+                <div class="flex items-center space-x-4">
+                    <button @click="scrollIndex = Math.max(scrollIndex - itemsPerPage, 0)" :disabled="scrollIndex === 0"
+                        class="flex items-center px-4 py-2 bg-teal-700 text-white rounded-md hover:bg-teal-600 transition-all duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed">
+                        <i class="fas fa-chevron-left mr-2"></i> Previous
+                    </button>
+                </div>
+
+                <!-- Category Links (Scrollable) -->
+                <div class="flex overflow-x-auto space-x-4 scrollbar-hide w-auto">
+                    <div class="flex" :style="'transform: translateX(-' + scrollIndex * 220 + 'px)'">
+                        @foreach($kategori as $kat)
+                        <a href="{{ route('kategori.show', $kat->id) }}"
+                            class="min-w-max text-teal-700 hover:bg-teal-700 hover:text-white rounded py-2 px-4 transition-all duration-200 transform hover:scale-105">
+                            {{ $kat->nama_kategori }}
+                        </a>
+                        @endforeach
+                    </div>
+                </div>
+
+                <!-- Next Button (Right aligned) -->
+                <div class="flex items-center space-x-4">
+                    <button
+                        @click="scrollIndex = Math.min(scrollIndex + itemsPerPage, Math.max(0, totalItems - itemsPerPage))"
+                        :disabled="scrollIndex >= totalItems - itemsPerPage"
+                        class="flex items-center px-4 py-2 bg-teal-700 text-white rounded-md hover:bg-teal-600 transition-all duration-200 disabled:bg-gray-300 disabled:cursor-not-allowed">
+                        Next <i class="fas fa-chevron-right ml-2"></i>
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
-
-
     <div class="container mx-auto flex flex-wrap py-6">
 
         <!-- Posts Section -->
         <section class="w-full md:w-2/3 flex flex-col items-center px-3">
 
+            @foreach($berita as $item)
             <article
                 class="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden transition-transform my-4 duration-300 hover:shadow-xl">
                 <!-- Featured Image -->
                 <div class="relative h-48 overflow-hidden">
-                    <img src="{{ asset('images/landscape-1.jpg') }}" alt="Article featured image"
+                    <img src="{{ asset('storage/' . $item->gambar) }}" alt="Article featured image"
                         class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
                 </div>
 
@@ -59,34 +74,36 @@
                     <div class="flex items-center">
                         <a href="#"
                             class="text-teal-600 text-sm font-bold uppercase tracking-wider hover:text-teal-500 transition-colors">
-                            Sports
+                            {{ $item->kategori->nama_kategori }}
                         </a>
                     </div>
 
                     <!-- Title -->
                     <h2 class="text-2xl font-bold leading-tight">
-                        <a href="#" class="text-gray-900 hover:text-gray-700 transition-colors">
-                            Lorem Ipsum Dolor Sit Amet Dolor Sit Amet
+                        <a href="{{ route('berita.show', $item->id) }}"
+                            class="text-gray-900 hover:text-gray-700 transition-colors">
+                            {{ $item->judul }}
                         </a>
                     </h2>
 
                     <!-- Meta Information -->
                     <div class="text-sm text-gray-600">
-                        Oleh <a href="#" class="font-semibold hover:text-gray-800 transition-colors">My Blog</a>
+                        Oleh <a href="#"
+                            class="font-semibold hover:text-gray-800 transition-colors">{{ $item->author }}</a>
                         <span class="mx-2">•</span>
-                        <time datetime="2019-10-22">22 Oktober 2019</time>
+                        <time
+                            datetime="{{ $item->created_at->format('Y-m-d') }}">{{ $item->created_at->format('d M Y') }}</time>
                     </div>
 
                     <!-- Excerpt -->
                     <p class="text-gray-600 leading-relaxed">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis porta dui.
-                        Ut eu iaculis massa. Sed ornare ligula lacus, quis iaculis dui porta volutpat.
-                        In sit amet posuere magna..
+                        {{ Str::limit(strip_tags($item->konten), 150) }}
+                        <!-- strip_tags() menghapus tag HTML dari konten berita -->
                     </p>
 
                     <!-- Read More Link -->
                     <div class="pt-2">
-                        <a href="#"
+                        <a href="{{ route('berita.show', $item->id) }}"
                             class="inline-flex items-center space-x-2 text-gray-800 font-extralight hover:text-teal-500 transition-colors">
                             <span>SELENGKAPNYA</span>
                             <i class="fas fa-arrow-right text-sm"></i>
@@ -94,118 +111,12 @@
                     </div>
                 </div>
             </article>
-
-            <article
-                class="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden transition-transform my-4 duration-300 hover:shadow-xl">
-                <!-- Featured Image -->
-                <div class="relative h-48 overflow-hidden">
-                    <img src="{{ asset('images/landscape-2.jpg') }}" alt="Article featured image"
-                        class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                </div>
-
-                <!-- Article Content -->
-                <div class="flex flex-col flex-grow p-6 space-y-4">
-                    <!-- Category -->
-                    <div class="flex items-center">
-                        <a href="#"
-                            class="text-teal-600 text-sm font-bold uppercase tracking-wider hover:text-teal-500 transition-colors">
-                            Medical
-                        </a>
-                    </div>
-
-                    <!-- Title -->
-                    <h2 class="text-2xl font-bold leading-tight">
-                        <a href="#" class="text-gray-900 hover:text-gray-700 transition-colors">
-                            Fugit harum ipsam porro
-                        </a>
-                    </h2>
-
-                    <!-- Meta Information -->
-                    <div class="text-sm text-gray-600">
-                        Oleh <a href="#" class="font-semibold hover:text-gray-800 transition-colors">My Blog</a>
-                        <span class="mx-2">•</span>
-                        <time datetime="2019-10-22">22 Oktober 2019</time>
-                    </div>
-
-                    <!-- Excerpt -->
-                    <p class="text-gray-600 leading-relaxed">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis porta dui.
-                        Ut eu iaculis massa. Sed ornare ligula lacus, quis iaculis dui porta volutpat.
-                        In sit amet posuere magna..
-                    </p>
-
-                    <!-- Read More Link -->
-                    <div class="pt-2">
-                        <a href="#"
-                            class="inline-flex items-center space-x-2 text-gray-800 font-extralight hover:text-teal-500 transition-colors">
-                            <span>SELENGKAPNYA</span>
-                            <i class="fas fa-arrow-right text-sm"></i>
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <article
-                class="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden transition-transform my-4 duration-300 hover:shadow-xl">
-                <!-- Featured Image -->
-                <div class="relative h-48 overflow-hidden">
-                    <img src="{{ asset('images/landscape-3.jpg') }}" alt="Article featured image"
-                        class="w-full h-full object-cover transition-transform duration-300 hover:scale-105">
-                </div>
-
-                <!-- Article Content -->
-                <div class="flex flex-col flex-grow p-6 space-y-4">
-                    <!-- Category -->
-                    <div class="flex items-center">
-                        <a href="#"
-                            class="text-teal-600 text-sm font-bold uppercase tracking-wider hover:text-teal-500 transition-colors">
-                            Information
-                        </a>
-                    </div>
-
-                    <!-- Title -->
-                    <h2 class="text-2xl font-bold leading-tight">
-                        <a href="#" class="text-gray-900 hover:text-gray-700 transition-colors">
-                            Iusto, accusamus necessitatibus repudiandae tempore illo cupiditate?
-                        </a>
-                    </h2>
-
-                    <!-- Meta Information -->
-                    <div class="text-sm text-gray-600">
-                        Oleh <a href="#" class="font-semibold hover:text-gray-800 transition-colors">My Blog</a>
-                        <span class="mx-2">•</span>
-                        <time datetime="2019-10-22">22 Oktober 2019</time>
-                    </div>
-
-                    <!-- Excerpt -->
-                    <p class="text-gray-600 leading-relaxed">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus quis porta dui.
-                        Ut eu iaculis massa. Sed ornare ligula lacus, quis iaculis dui porta volutpat.
-                        In sit amet posuere magna..
-                    </p>
-
-                    <!-- Read More Link -->
-                    <div class="pt-2">
-                        <a href="#"
-                            class="inline-flex items-center space-x-2 text-gray-800 font-extralight hover:text-teal-500 transition-colors">
-                            <span>SELENGKAPNYA</span>
-                            <i class="fas fa-arrow-right text-sm"></i>
-                        </a>
-                    </div>
-                </div>
-            </article>
+            @endforeach
 
             <!-- Pagination -->
-            <div class="flex items-center py-8 gap-2">
-                <a href="#"
-                    class="h-10 w-10 rounded-md bg-teal-800 hover:bg-teal-500 font-semibold text-white text-sm flex items-center justify-center">1</a>
-                <a href="#"
-                    class="h-10 w-10 rounded-md font-semibold text-gray-800 hover:bg-teal-500 hover:text-white text-sm flex items-center justify-center">2</a>
-                <a href="#"
-                    class="h-10 w-10 font-semibold text-gray-800 hover:text-teal-500 text-sm flex items-center justify-center ml-3">Next
-                    <i class="fas fa-arrow-right ml-2"></i></a>
+            <div class="w-full flex justify-center">
+                {{ $berita->links('vendor.pagination.tailwind') }}
             </div>
-
         </section>
 
         <!-- Sidebar Section -->
@@ -262,8 +173,6 @@
             </div>
 
         </aside>
-
-
 
     </div>
 </section>

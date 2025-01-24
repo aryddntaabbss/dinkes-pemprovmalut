@@ -19,6 +19,22 @@
 
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+        {{-- Style --}}
+        <style>
+            /* Untuk menyembunyikan scrollbar */
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                /* Internet Explorer 10+ */
+                scrollbar-width: none;
+                /* Firefox */
+            }
+
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+                /* Safari and Chrome */
+            }
+        </style>
     </head>
 
     <body class="font-sans antialiased">
@@ -32,6 +48,10 @@
             </main>
             @include('components.footer')
         </div>
+
+        <script>
+            window.kategoriLength = {{ count($kategori) }};
+        </script>
     </body>
 
 </html>
