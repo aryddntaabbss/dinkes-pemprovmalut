@@ -12,7 +12,14 @@ class Berita extends Model
     // Tentukan nama tabel jika berbeda
     protected $table = 'berita';
 
-    protected $fillable = ['judul', 'konten', 'gambar', 'kategori_id'];
+    protected $fillable = [
+        'judul',
+        'konten',
+        'gambar',
+        'kategori_id',
+        'penulis',
+        'up_berita'
+    ];
 
     /**
      * Relasi ke kategori (belongsTo)

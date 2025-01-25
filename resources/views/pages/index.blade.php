@@ -54,11 +54,10 @@
             </div>
         </div>
     </nav>
-    <div class="container mx-auto flex flex-wrap py-6">
 
+    <div class="container mx-auto flex flex-wrap py-6">
         <!-- Posts Section -->
         <section class="w-full md:w-2/3 flex flex-col items-center px-3">
-
             @foreach($berita as $item)
             <article
                 class="flex flex-col bg-white rounded-lg shadow-lg overflow-hidden transition-transform my-4 duration-300 hover:shadow-xl">
@@ -72,7 +71,7 @@
                 <div class="flex flex-col flex-grow p-6 space-y-4">
                     <!-- Category -->
                     <div class="flex items-center">
-                        <a href="#"
+                        <a
                             class="text-teal-600 text-sm font-bold uppercase tracking-wider hover:text-teal-500 transition-colors">
                             {{ $item->kategori->nama_kategori }}
                         </a>
@@ -88,8 +87,7 @@
 
                     <!-- Meta Information -->
                     <div class="text-sm text-gray-600">
-                        Oleh <a href="#"
-                            class="font-semibold hover:text-gray-800 transition-colors">{{ $item->author }}</a>
+                        Oleh <a class="font-semibold hover:text-gray-800 transition-colors">{{ $item->penulis }}</a>
                         <span class="mx-2">•</span>
                         <time
                             datetime="{{ $item->created_at->format('Y-m-d') }}">{{ $item->created_at->format('d M Y') }}</time>
@@ -98,7 +96,6 @@
                     <!-- Excerpt -->
                     <p class="text-gray-600 leading-relaxed">
                         {{ Str::limit(strip_tags($item->konten), 150) }}
-                        <!-- strip_tags() menghapus tag HTML dari konten berita -->
                     </p>
 
                     <!-- Read More Link -->
@@ -132,46 +129,42 @@
                 </a>
             </div>
 
-            {{-- Berita Terpopuler --}}
+            <!-- Berita Terpopuler -->
             <div class="w-full bg-white shadow-lg rounded-lg flex flex-col my-4 p-6">
                 <p class="text-xl font-bold pb-5">Berita Terpopuler</p>
 
                 <div class="space-y-4">
-                    <div class="flex items-center space-x-4 border-b">
-                        <img class="w-14 h-auto" src="{{ asset('images/logo.png') }}" alt="Berita 2">
-                        <div>
-                            <h3 class="text-lg font-semibold">Berita 1</h3>
+                    @foreach($beritaTerpopuler as $item)
+                    <div class="flex items-center space-x-4 border-b py-4">
+                        <!-- Gambar -->
+                        <img class="w-14 h-20 object-cover rounded-md" src="{{ asset('storage/' . $item->gambar) }}"
+                            alt="{{ $item->judul }}">
+
+                        <div class="flex-1">
+                            <!-- Judul -->
+                            <h3 class="text-lg font-semibold text-gray-800 hover:text-teal-500 transition-colors">
+                                <a
+                                    href="{{ route('berita.show', $item->id) }}">{{ Str::limit(strip_tags($item->judul), 20) }}</a>
+                            </h3>
+
+                            <!-- Excerpt -->
                             <p class="text-gray-600 text-justify">
-                                {{ substr('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis non, eius quia porro ipsa sapiente atque dicta quibusdam nulla possimus voluptatum.', 0, 60) }}...
+                                {{ Str::limit(strip_tags($item->konten), 22) }}
                             </p>
-                            <div class="text-sm text-gray-500 pb-2">
+
+                            <!-- Meta Information -->
+                            <div class="text-sm text-gray-500 pt-2">
                                 <span>Oleh <a href="#"
-                                        class="font-medium text-gray-700 hover:text-gray-900 transition-colors">My
-                                        Blog</a></span>
+                                        class="font-medium text-gray-700 hover:text-gray-900 transition-colors">{{ $item->penulis }}</a></span>
                                 <span class="mx-1">•</span>
-                                <time datetime="2019-10-22">22 Oktober 2019</time>
+                                <time
+                                    datetime="{{ $item->created_at->format('Y-m-d') }}">{{ $item->created_at->format('d M Y') }}</time>
                             </div>
                         </div>
                     </div>
-                    <div class="flex items-center space-x-4 border-b">
-                        <img class="w-14 h-auto" src="{{ asset('images/logo.png') }}" alt="Berita 2">
-                        <div>
-                            <h3 class="text-lg font-semibold">Berita 2</h3>
-                            <p class="text-gray-600 text-justify">
-                                {{ substr('Quis non, eius quia porro ipsa sapiente atque dicta quibusdam nulla possimus voluptatum.', 0, 60) }}...
-                            </p>
-                            <div class="text-sm text-gray-500 pb-2">
-                                <span>Oleh <a href="#"
-                                        class="font-medium text-gray-700 hover:text-gray-900 transition-colors">My
-                                        Blog</a></span>
-                                <span class="mx-1">•</span>
-                                <time datetime="2019-10-22">22 Oktober 2019</time>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             </div>
-
         </aside>
 
     </div>

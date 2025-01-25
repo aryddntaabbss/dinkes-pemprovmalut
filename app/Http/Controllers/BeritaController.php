@@ -5,113 +5,123 @@ namespace App\Http\Controllers;
 use App\Models\Berita;
 use App\Models\Kategori;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class BeritaController extends Controller
 {
-    /**
-     * Menampilkan daftar berita.
-     */
     public function index()
     {
-        // Mengambil semua berita dengan relasi kategori
-        $berita = Berita::with('kategori')->get(); // Menggunakan get() untuk mengambil semua berita
+        // Fetch all berita with category relationships
+        $berita = Berita::with('kategori')->get();
 
-        // Mengirim data berita ke view
+        // Return the view with berita data
         return view('dashboard.berita.index', compact('berita'));
     }
 
-
-    /**
-     * Menampilkan form untuk membuat berita baru.
-     */
     public function create()
     {
-        $kategori = Kategori::all(); // Mengambil semua kategori
+        $kategori = Kategori::all();
         return view('dashboard.berita.create', compact('kategori'));
     }
 
-    /**
-     * Menyimpan berita baru ke database.
-     */
     public function store(Request $request)
     {
+        // Validate incoming request
         $validated = $request->validate([
             'judul' => 'required|max:255',
             'konten' => 'required',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:30048',
             'kategori_id' => 'required|exists:kategori,id',
+            'penulis' => 'nullable|string|max:255',
+            'up_berita' => 'nullable|boolean',
         ]);
 
-        // Upload gambar jika ada
+        // Handle image upload if it exists
         $gambarPath = null;
         if ($request->hasFile('gambar')) {
             $gambarPath = $request->file('gambar')->store('berita', 'public');
         }
 
+        // Create berita entry in the database
         Berita::create([
             'judul' => $request->judul,
             'konten' => $request->konten,
             'gambar' => $gambarPath,
             'kategori_id' => $request->kategori_id,
+            'penulis' => $request->penulis,
+            'up_berita' => $request->up_berita ?? false, // Default to false if not provided
         ]);
 
         return redirect()->route('berita.index')->with('success', 'Berita berhasil ditambahkan.');
     }
 
-    /**
-     * Menampilkan form untuk mengedit berita.
-     */
     public function edit(Berita $berita)
     {
         $kategori = Kategori::all();
         return view('dashboard.berita.edit', compact('berita', 'kategori'));
     }
 
-    /**
-     * Memperbarui berita di database.
-     */
     public function update(Request $request, Berita $berita)
     {
+        // Validate incoming request
         $validated = $request->validate([
             'judul' => 'required|max:255',
             'konten' => 'required',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:30048',
             'kategori_id' => 'required|exists:kategori,id',
+            'penulis' => 'nullable|string|max:255',
+            'up_berita' => 'nullable|boolean',
         ]);
 
-        // Update gambar jika ada
+        // Handle image update if a new image is uploaded
         if ($request->hasFile('gambar')) {
+            // Delete the old image if it exists
             if ($berita->gambar) {
-                \Storage::delete('public/' . $berita->gambar);
+                Storage::delete('public/' . $berita->gambar);
             }
+
+            // Store new image
             $gambarPath = $request->file('gambar')->store('berita', 'public');
             $berita->gambar = $gambarPath;
         }
 
+        // Update the berita record with new data
         $berita->update([
             'judul' => $request->judul,
             'konten' => $request->konten,
             'kategori_id' => $request->kategori_id,
+            'penulis' => $request->penulis,
+            'up_berita' => $request->up_berita ?? false, // Default to false if not provided
         ]);
 
         return redirect()->route('berita.index')->with('success', 'Berita berhasil diperbarui.');
     }
 
-    /**
-     * Menghapus berita dari database.
-     */
     public function destroy(Berita $berita)
     {
+        // Delete the image if it exists
         if ($berita->gambar) {
-            \Storage::delete('public/' . $berita->gambar);
+            Storage::delete('public/' . $berita->gambar);
         }
 
+        // Delete the berita record
         $berita->delete();
+
         return redirect()->route('berita.index')->with('success', 'Berita berhasil dihapus.');
     }
 
-    public function show(Berita $berita)
+    public function show($id)
     {
-        return view('dashboard.berita.show', compact('berita'));
+        $berita = Berita::findOrFail($id);
+        return view('pages.show', compact('berita'));
+    }
+
+    public function updateUp(Request $request, Berita $berita)
+    {
+        // Toggle the up_berita status
+        $berita->up_berita = !$berita->up_berita;
+        $berita->save();
+
+        return redirect()->route('berita.index')->with('success', 'Status up berita berhasil diperbarui.');
     }
 }

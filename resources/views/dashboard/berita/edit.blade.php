@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
@@ -47,6 +46,31 @@
                             class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required>{{ old('konten', $berita->konten) }}</textarea>
                         @error('konten')
+                        <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- Penulis Berita -->
+                    <div class="mb-4">
+                        <label for="penulis" class="block text-sm font-medium text-gray-700">Penulis:</label>
+                        <input type="text" id="penulis" name="penulis" value="{{ old('penulis', $berita->penulis) }}"
+                            class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        @error('penulis')
+                        <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- Up Berita (Tombol) -->
+                    <div class="mb-4">
+                        <form action="{{ route('berita.update.up', $berita->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <button type="submit"
+                                class="px-4 py-2 rounded-md text-white {{ $berita->up_berita ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-600 hover:bg-gray-700' }}">
+                                {{ $berita->up_berita ? 'Populer' : 'Tidak Populer' }}
+                            </button>
+                        </form>
+                        @error('up_berita')
                         <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                         @enderror
                     </div>

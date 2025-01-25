@@ -22,6 +22,11 @@
                         <tr>
                             <th>
                                 <span class="flex items-center">
+                                    No
+                                </span>
+                            </th>
+                            <th>
+                                <span class="flex items-center">
                                     Judul Berita
                                 </span>
                             </th>
@@ -37,7 +42,17 @@
                             </th>
                             <th>
                                 <span class="flex items-center">
+                                    Penulis
+                                </span>
+                            </th>
+                            <th>
+                                <span class="flex items-center">
                                     Tanggal Dibuat
+                                </span>
+                            </th>
+                            <th>
+                                <span class="flex items-center">
+                                    Status
                                 </span>
                             </th>
                             <th>
@@ -50,17 +65,31 @@
                     <tbody>
                         @foreach($berita as $item)
                         <tr>
+                            <td>{{ $item->id }}</td>
                             <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $item->judul }}
                             </td>
                             <td>{{ $item->kategori->nama_kategori }}</td>
                             <td>{{ Str::limit(strip_tags($item->konten), 50) }}</td>
+                            <td>{{ $item->penulis}}</td>
                             <td>{{ $item->created_at->format('Y-m-d H:i') }}</td>
 
-                            <td class="flex space-x-2">
+                            <!-- Up Berita (Tombol) -->
+                            <td>
+                                <form action="{{ route('berita.update.up', $item->id) }}" method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <button type="submit"
+                                        class="px-3 py-2 rounded-md text-white {{ $item->up_berita ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-600 hover:bg-gray-700' }}">
+                                        {{ $item->up_berita ? 'Populer' : 'Tidak Populer' }}
+                                    </button>
+                                </form>
+                            </td>
+
+                            <td class="flex justify-center items-center space-x-2 text-white font-semibold">
                                 <!-- Tombol Edit -->
                                 <a href="{{ route('berita.edit', $item->id) }}"
-                                    class="text-blue-600 hover:text-blue-800">
-                                    Edit
+                                    class="px-2 py-1 rounded-md bg-blue-600 hover:bg-blue-800" title="Edit">
+                                    <i class="fas fa-edit"></i>
                                 </a>
 
                                 <!-- Tombol Hapus -->
@@ -69,7 +98,10 @@
                                     onsubmit="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-800">Hapus</button>
+                                    <button type="submit" class="px-2 py-1 rounded-md bg-red-600 hover:bg-red-800"
+                                        title="Hapus">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
                                 </form>
                             </td>
                         </tr>
@@ -78,8 +110,6 @@
                 </table>
             </div>
         </div>
-
-
     </div>
 
 </x-app-layout>

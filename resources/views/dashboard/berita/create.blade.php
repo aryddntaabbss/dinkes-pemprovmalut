@@ -1,10 +1,4 @@
 <x-app-layout>
-    {{-- <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Tambah Berita') }}
-    </h2>
-    </x-slot> --}}
-
     <div class="py-9">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg p-6">
@@ -14,6 +8,17 @@
                 <!-- Form Tambah Berita -->
                 <form action="{{ route('berita.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
+
+                    <!-- Penulis Berita -->
+                    <div class="mb-4">
+                        <label for="penulis" class="block text-sm font-medium text-gray-700">Penulis :</label>
+                        <input type="text" id="penulis" name="penulis" value="{{ old('penulis') }}"
+                            class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        @error('penulis')
+                        <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <!-- Judul Berita -->
                     <div class="mb-4">
                         <label for="judul" class="block text-sm font-medium text-gray-700">Judul Berita :</label>
@@ -47,13 +52,10 @@
                         <label for="konten" class="block text-sm font-medium text-gray-700">Konten Berita :</label>
                         <textarea id="konten" name="konten" rows="6"
                             class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">{{ old('konten') }}</textarea>
-
                         @error('konten')
                         <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                         @enderror
                     </div>
-
-
 
                     <!-- Gambar Berita -->
                     <div class="mb-4">
@@ -61,6 +63,19 @@
                         <input type="file" id="gambar" name="gambar"
                             class="mt-1 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
                         @error('gambar')
+                        <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- Berita Terpopuler (Checkbox) -->
+                    <div class="mb-4">
+                        <label for="up_berita" class="inline-flex items-center">
+                            <input type="checkbox" id="up_berita" name="up_berita" class="form-checkbox text-teal-600"
+                                {{ old('up_berita') ? 'checked' : '' }}>
+                            <span class="ml-2">Berita Terpopuler</span><span
+                                class="ml-2 text-gray-500">(opsional)</span>
+                        </label>
+                        @error('up_berita')
                         <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
                         @enderror
                     </div>
@@ -73,3 +88,15 @@
         </div>
     </div>
 </x-app-layout>
+
+<!-- Add CKEditor Script -->
+@push('scripts')
+<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+<script>
+    ClassicEditor
+        .create(document.querySelector('#konten'))
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+@endpush

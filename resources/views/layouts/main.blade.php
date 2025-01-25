@@ -49,9 +49,9 @@
             @include('components.footer')
         </div>
 
-        <script>
+        {{-- <script>
             window.kategoriLength = {{ count($kategori) }};
-        </script>
+        </script> --}}
     </body>
 
 </html>

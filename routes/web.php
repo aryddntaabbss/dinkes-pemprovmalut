@@ -6,39 +6,38 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/', function () {
-//     return view('pages/index');
-// });
-
+// Home Route
 Route::get('/', [HomeController::class, 'index'])->name('pages.index');
 
-
-// Berita Route
-Route::middleware(['auth'])->group(function () {
-    Route::get('/berita', [BeritaController::class, 'index'])->name('berita.index');
-    Route::get('/berita/create', [BeritaController::class, 'create'])->name('berita.create');
-    Route::post('/berita', [BeritaController::class, 'store'])->name('berita.store');
-    Route::get('/berita/{berita}/edit', [BeritaController::class, 'edit'])->name('berita.edit');
-    Route::put('/berita/{berita}', [BeritaController::class, 'update'])->name('berita.update');
-    Route::delete('/berita/{berita}', [BeritaController::class, 'destroy'])->name('berita.destroy');
-    Route::get('/berita/{berita}', [BeritaController::class, 'show'])->name('berita.show');
+// Berita Routes (auth protected)
+Route::middleware(['auth'])->prefix('berita')->name('berita.')->group(function () {
+    Route::get('/', [BeritaController::class, 'index'])->name('index');
+    Route::get('/create', [BeritaController::class, 'create'])->name('create');
+    Route::post('/', [BeritaController::class, 'store'])->name('store');
+    Route::get('/{berita}/edit', [BeritaController::class, 'edit'])->name('edit');
+    Route::put('/{berita}', [BeritaController::class, 'update'])->name('update');
+    Route::delete('/{berita}', [BeritaController::class, 'destroy'])->name('destroy');
+    Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('show');
+    Route::put('/{berita}/up', [BeritaController::class, 'updateUp'])->name('update.up');
 });
 
-// Kategori Route
-Route::middleware(['auth'])->group(function () {
-    Route::get('/kategori', [KategoriController::class, 'index'])->name('kategori.index');
-    Route::get('/kategori/create', [KategoriController::class, 'create'])->name('kategori.create');
-    Route::post('/kategori', [KategoriController::class, 'store'])->name('kategori.store');
-    Route::get('/kategori/{kategori}/edit', [KategoriController::class, 'edit'])->name('kategori.edit');
-    Route::put('/kategori/{kategori}', [KategoriController::class, 'update'])->name('kategori.update');
-    Route::delete('/kategori/{kategori}', [KategoriController::class, 'destroy'])->name('kategori.destroy');
-    Route::get('/kategori/{kategori}', [KategoriController::class, 'show'])->name('kategori.show');
+// Kategori Routes (auth protected)
+Route::middleware(['auth'])->prefix('kategori')->name('kategori.')->group(function () {
+    Route::get('/', [KategoriController::class, 'index'])->name('index');
+    Route::get('/create', [KategoriController::class, 'create'])->name('create');
+    Route::post('/', [KategoriController::class, 'store'])->name('store');
+    Route::get('/{kategori}/edit', [KategoriController::class, 'edit'])->name('edit');
+    Route::put('/{kategori}', [KategoriController::class, 'update'])->name('update');
+    Route::delete('/{kategori}', [KategoriController::class, 'destroy'])->name('destroy');
+    Route::get('/{kategori}', [KategoriController::class, 'show'])->name('show');
 });
 
+// Dashboard Route (auth protected)
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+// Profile Routes (auth protected)
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
