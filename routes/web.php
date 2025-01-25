@@ -2,12 +2,18 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KategoriController;
 use Illuminate\Support\Facades\Route;
 
 // Home Route
 Route::get('/', [HomeController::class, 'index'])->name('pages.index');
+
+// Dashboard Routes (auth protected)
+Route::get('/dashboard', [DashboardController::class, 'index'])
+    ->middleware(['auth', 'verified'])
+    ->name('dashboard.index');
 
 // Berita Routes (auth protected)
 Route::middleware(['auth'])->prefix('berita')->name('berita.')->group(function () {
@@ -31,11 +37,6 @@ Route::middleware(['auth'])->prefix('kategori')->name('kategori.')->group(functi
     Route::delete('/{kategori}', [KategoriController::class, 'destroy'])->name('destroy');
     Route::get('/{kategori}', [KategoriController::class, 'show'])->name('show');
 });
-
-// Dashboard Route (auth protected)
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 // Profile Routes (auth protected)
 Route::middleware('auth')->group(function () {

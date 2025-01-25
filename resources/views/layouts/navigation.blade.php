@@ -4,7 +4,7 @@
         <div class="flex justify-between h-16">
             <div class="flex items-center">
                 <!-- Logo -->
-                <a href="{{ route('dashboard') }}" class="shrink-0 flex items-center space-x-2 px-5">
+                <a href="{{ route('dashboard.index') }}" class="shrink-0 flex items-center space-x-2 px-5">
                     <!-- Logo Image -->
                     <img class="h-10 w-auto" src="{{ asset('images/logo.png') }}" alt="Logo">
 
@@ -14,7 +14,7 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden sm:flex sm:space-x-8">
-                    <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+                    <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
@@ -95,7 +95,7 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{ 'block': open, 'hidden': !open }" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
-            <x-responsive-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
+            <x-responsive-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')">
                 {{ __('Dashboard') }}
             </x-responsive-nav-link>
 
