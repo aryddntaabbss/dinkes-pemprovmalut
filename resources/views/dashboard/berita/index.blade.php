@@ -32,12 +32,12 @@
                             </th>
                             <th>
                                 <span class="flex items-center">
-                                    Kategori
+                                    Konten
                                 </span>
                             </th>
                             <th>
                                 <span class="flex items-center">
-                                    Konten
+                                    Kategori
                                 </span>
                             </th>
                             <th>
@@ -68,8 +68,8 @@
                             <td>{{ $item->id }}</td>
                             <td class="font-medium text-gray-900 whitespace-nowrap dark:text-white">{{ $item->judul }}
                             </td>
-                            <td>{{ $item->kategori->nama_kategori }}</td>
                             <td>{{ Str::limit(strip_tags($item->konten), 50) }}</td>
+                            <td>{{ $item->kategori->nama_kategori }}</td>
                             <td>{{ $item->penulis}}</td>
                             <td>{{ $item->created_at->format('Y-m-d H:i') }}</td>
 
