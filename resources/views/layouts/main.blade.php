@@ -46,6 +46,7 @@
             <main class="flex-grow">
                 @yield('body')
             </main>
+            @include('components.to-top')
             @include('components.footer')
         </div>
 

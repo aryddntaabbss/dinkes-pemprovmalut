@@ -21,16 +21,26 @@
                         @enderror
                     </div>
 
+                    <!-- Input Penulis -->
+                    <div class="mb-4">
+                        <label for="penulis" class="block text-sm font-medium text-gray-700">Penulis:</label>
+                        <input type="text" id="penulis" name="penulis" value="{{ old('penulis', $berita->penulis) }}"
+                            class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        @error('penulis')
+                        <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <!-- Input Kategori -->
                     <div class="mb-4">
                         <label for="kategori_id" class="block text-sm font-medium text-gray-700">Kategori:</label>
                         <select id="kategori_id" name="kategori_id"
-                            class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
-                            required>
-                            @foreach($kategori as $kat)
-                            <option value="{{ $kat->id }}"
-                                {{ $kat->id == old('kategori_id', $berita->kategori_id) ? 'selected' : '' }}>
-                                {{ $kat->nama_kategori }}
+                            class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
+                            <option value="">Pilih Kategori</option>
+                            @foreach($kategori as $k)
+                            <option value="{{ $k->id }}"
+                                {{ old('kategori_id', $berita->kategori_id) == $k->id ? 'selected' : '' }}>
+                                {{ $k->nama_kategori }}
                             </option>
                             @endforeach
                         </select>
@@ -42,7 +52,7 @@
                     <!-- Input Konten Berita -->
                     <div class="mb-4">
                         <label for="konten" class="block text-sm font-medium text-gray-700">Konten Berita:</label>
-                        <textarea id="konten" name="konten" rows="4"
+                        <textarea id="konten" name="konten" rows="5"
                             class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
                             required>{{ old('konten', $berita->konten) }}</textarea>
                         @error('konten')
@@ -50,44 +60,15 @@
                         @enderror
                     </div>
 
-                    <!-- Penulis Berita -->
-                    <div class="mb-4">
-                        <label for="penulis" class="block text-sm font-medium text-gray-700">Penulis:</label>
-                        <input type="text" id="penulis" name="penulis" value="{{ old('penulis', $berita->penulis) }}"
-                            class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-                        @error('penulis')
-                        <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-
-                    <!-- Up Berita (Tombol) -->
-                    <div class="mb-4">
-                        <form action="{{ route('berita.update.up', $berita->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <button type="submit"
-                                class="px-4 py-2 rounded-md text-white {{ $berita->up_berita ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-600 hover:bg-gray-700' }}">
-                                {{ $berita->up_berita ? 'Populer' : 'Tidak Populer' }}
-                            </button>
-                        </form>
-                        @error('up_berita')
-                        <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
-                        @enderror
-                    </div>
-
                     <!-- Input Gambar Berita -->
                     <div class="mb-4">
-                        <label for="gambar" class="block text-sm font-medium text-gray-700">Gambar Berita
-                            (Opsional):</label>
+                        <label for="gambar" class="block text-sm font-medium text-gray-700">Gambar Berita:</label>
                         <input type="file" id="gambar" name="gambar"
                             class="mt-1 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500">
-
-                        @if($berita->gambar)
+                        @if ($berita->gambar)
                         <div class="mt-2">
-                            <img src="{{ asset('storage/' . $berita->gambar) }}" alt="Gambar Berita" width="100">
-                            <a href="{{ route('berita.destroy', $berita->id) }}"
-                                onclick="return confirm('Apakah Anda yakin ingin menghapus gambar?')"
-                                class="text-red-500 text-sm hover:text-red-700 ml-2">Hapus Gambar</a>
+                            <img src="{{ Storage::url($berita->gambar) }}" alt="Current Image"
+                                class="w-32 h-32 object-cover">
                         </div>
                         @endif
                         @error('gambar')
@@ -95,16 +76,45 @@
                         @enderror
                     </div>
 
-                    <!-- Tombol Submit -->
-                    <div>
-                        <button type="submit"
-                            class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                            Simpan Perubahan
-                        </button>
+                    <!-- Checkbox Up Berita -->
+                    <div class="mb-4">
+                        <label for="up_berita" class="inline-flex items-center">
+                            <input type="checkbox" id="up_berita" name="up_berita"
+                                {{ old('up_berita', $berita->up_berita) ? 'checked' : '' }}
+                                class="form-checkbox h-5 w-5 text-blue-600 border-gray-300 rounded">
+                            <span class="ml-2 text-sm text-gray-700">Up Berita?</span>
+                        </label>
                     </div>
+
+                    <div class="flex gap-3">
+                        <!-- Submit Button -->
+                        <div class="flex flex-col mt-6">
+                            <button type="submit"
+                                class="px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                Ubah Berita
+                            </button>
+                        </div>
+
+                        <!-- Tombol Batal -->
+                        <div class="flex flex-col mt-6">
+                            <a href="{{ route('berita.index') }}"
+                                class="px-4 py-2 bg-gray-500 text-white rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                                Batal
+                            </a>
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>
     </div>
 
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+                .create(document.querySelector('#konten'))
+                .catch(error => {
+                    console.error(error);
+                });
+    </script>
 </x-app-layout>

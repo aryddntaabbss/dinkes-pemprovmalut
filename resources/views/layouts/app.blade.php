@@ -10,7 +10,7 @@
         <link href="{{ asset('images/logo.png') }}" rel="icon">
         <link href="{{ asset('images/logo.png') }}" rel="apple-touch-icon">
 
-        <title>AdPanel {{ config('app.name', 'Laravel') }}</title>
+        <title>AdPanel | {{ config('app.name', 'Laravel') }}</title>
 
         <!-- Fonts -->
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">

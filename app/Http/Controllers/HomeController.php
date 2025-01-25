@@ -28,4 +28,16 @@ class HomeController extends Controller
             'kategori' => $kategori
         ]);
     }
+
+    public function blog()
+    {
+        $beritaTerpopuler = Berita::where('up_berita', true)
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('pages.show', [
+            'beritaTerpopuler' => $beritaTerpopuler,
+        ]);
+    }
 }

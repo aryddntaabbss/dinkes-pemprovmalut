@@ -113,7 +113,15 @@ class BeritaController extends Controller
     public function show($id)
     {
         $berita = Berita::findOrFail($id);
-        return view('pages.show', compact('berita'));
+        $beritaTerpopuler = Berita::where('up_berita', true)
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('pages.show', [
+            'berita' => $berita,
+            'beritaTerpopuler' => $beritaTerpopuler,
+        ]);
     }
 
     public function updateUp(Request $request, Berita $berita)

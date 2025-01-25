@@ -80,23 +80,35 @@
                         @enderror
                     </div>
 
-                    <button type="submit"
-                        class="w-full py-2 px-4 bg-blue-600 text-white font-semibold rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">Simpan</button>
+                    <div class="flex gap-3">
+                        <!-- Submit Button -->
+                        <div class="flex flex-col">
+                            <button type="submit"
+                                class="px-4 py-2 bg-blue-500 text-white rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                Simpan
+                            </button>
+                        </div>
+
+                        <!-- Tombol Batal -->
+                        <div class="flex flex-col">
+                            <a href="{{ route('berita.index') }}"
+                                class="px-4 py-2 bg-gray-500 text-white rounded-md shadow-sm hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500">
+                                Batal
+                            </a>
+                        </div>
+                    </div>
                 </form>
 
             </div>
         </div>
     </div>
-</x-app-layout>
 
-<!-- Add CKEditor Script -->
-@push('scripts')
-<script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
-<script>
-    ClassicEditor
-        .create(document.querySelector('#konten'))
-        .catch(error => {
-            console.error(error);
-        });
-</script>
-@endpush
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
+    <script>
+        ClassicEditor
+            .create(document.querySelector('#konten'))
+            .catch(error => {
+                console.error(error);
+            });
+    </script>
+</x-app-layout>
