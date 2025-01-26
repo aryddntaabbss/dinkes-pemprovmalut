@@ -6,17 +6,20 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProfilController;
+use App\Http\Controllers\InformasiController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Profil;
-
-
-
+use App\Models\Informasi;
 
 // Home Route
 Route::get('/', [HomeController::class, 'index'])->name('pages.index');
 Route::get('/profil/{slug}', function ($slug) {
     $page = Profil::where('slug', $slug)->firstOrFail();
-    return view('pages.profil.index', compact('page'));
+    return view('pages.blank', compact('page'));
+});
+Route::get('/informasi/{slug}', function ($slug) {
+    $page = Informasi::where('slug', $slug)->firstOrFail();
+    return view('pages.blank', compact('page'));
 });
 
 // Dashboard Routes (auth protected)
@@ -58,6 +61,19 @@ Route::prefix('set-profil')->middleware('auth')->group(function () {
     Route::put('profil/{profil}', [ProfilController::class, 'update'])->name('profil.update');
     Route::delete('profil/{profil}', [ProfilController::class, 'destroy'])->name('profil.destroy');
 });
+
+// Set-Informasi Routes (auth protected)
+Route::prefix('set-informasi')->middleware('auth')->group(function () {
+    // Page Routes
+    Route::get('informasi', [InformasiController::class, 'index'])->name('informasi.index');
+    Route::get('informasi/{informasi}', [InformasiController::class, 'show'])->name('informasi.show');
+    Route::get('/create', [InformasiController::class, 'create'])->name('informasi.create');
+    Route::post('informasi', [InformasiController::class, 'store'])->name('informasi.store');
+    Route::get('informasi/{informasi}/edit', [InformasiController::class, 'edit'])->name('informasi.edit');
+    Route::put('informasi/{informasi}', [InformasiController::class, 'update'])->name('informasi.update');
+    Route::delete('informasi/{informasi}', [InformasiController::class, 'destroy'])->name('informasi.destroy');
+});
+
 
 // Profile Routes (auth protected)
 Route::middleware('auth')->group(function () {

@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 use App\Models\Profil;
+use App\Models\Informasi;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -24,6 +25,7 @@ class AppServiceProvider extends ServiceProvider
     {
         View::composer('layouts.main', function ($view) {
             $view->with('profilMenus', Profil::all());
+            $view->with('informasilMenus', Informasi::all());
         });
     }
 }

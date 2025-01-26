@@ -56,43 +56,17 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                <!-- Informasi Content -->
+                <!-- Profil Content -->
                 <div class="absolute left-0 hidden mt-2 w-56 p-3 bg-white shadow-lg rounded-md group-hover:block z-50">
-                    <a href="#"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Berita
-                        dan Informasi</a>
-                    <a href="#"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Tips
-                        Kesehatan</a>
-
-                    <!-- Data Kesehatan dengan Nested Dropdown -->
-                    <div class="relative group/nested">
-                        <a href="#"
-                            class="px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500 flex justify-between items-center">
-                            Data Kesehatan
-                            <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-                            </svg>
-                        </a>
-                        <!-- Nested Dropdown untuk Data Kesehatan -->
-                        <div
-                            class="absolute left-full top-0 hidden w-48 p-3 bg-white shadow-lg rounded-md group-hover/nested:block -mt-2 ml-2">
-                            <a href="#"
-                                class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Sekretariat</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Bidang
-                                Kesmas</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Bidang
-                                P2</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Bidang
-                                Yankes</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Bidang
-                                SDK</a>
-                        </div>
-                    </div>
+                    @if(isset($informasilMenus) && $informasilMenus->count() > 0)
+                    @foreach($informasilMenus as $menu)
+                    {{-- <a href="{{ $menu->url }}">{{ $menu->name }}</a> --}}
+                    <a href="{{ url('/informasi/'.$menu->slug) }}"
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">{{ $menu->name }}</a>
+                    @endforeach
+                    @else
+                    <p>No menu available</p>
+                    @endif
                 </div>
             </div>
 
