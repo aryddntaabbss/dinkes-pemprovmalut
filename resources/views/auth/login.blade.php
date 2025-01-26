@@ -4,6 +4,7 @@
 
     <form method="POST" action="{{ route('login') }}">
         @csrf
+        @method('POST')
 
         <!-- Email Address -->
         <div>

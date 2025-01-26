@@ -3,7 +3,6 @@
         <!-- Logo -->
         <div class="flex lg:flex-1">
             <a href="/" class="-m-1.5 p-1.5">
-                <span class="sr-only">Your Company</span>
                 <img class="h-10 w-auto" src="{{ asset('images/logo-dinkes.png') }}" alt="Logo">
             </a>
         </div>
@@ -36,24 +35,15 @@
                 </button>
                 <!-- Profil Content -->
                 <div class="absolute left-0 hidden mt-2 w-56 p-3 bg-white shadow-lg rounded-md group-hover:block z-50">
-                    <a href="#"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Selayang
-                        Pandang</a>
-                    <a href="#"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Visi
-                        Misi</a>
-                    <a href="#"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Tugas
-                        dan
-                        Fungsi</a>
-                    <a href="#"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Struktur
-                        Organisasi</a>
-                    <a href="#"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">UPTD</a>
-                    <a href="#"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Profil
-                        Pejabat</a>
+                    @if(isset($profilMenus) && $profilMenus->count() > 0)
+                    @foreach($profilMenus as $menu)
+                    {{-- <a href="{{ $menu->url }}">{{ $menu->name }}</a> --}}
+                    <a href="{{ url('/profil/'.$menu->slug) }}"
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">{{ $menu->name }}</a>
+                    @endforeach
+                    @else
+                    <p>No menu available</p>
+                    @endif
                 </div>
             </div>
 
@@ -155,6 +145,7 @@
             </div>
 
             <a href="#" class="text-sm font-semibold text-white hover:text-gray-200">Kontak Kami</a>
+
         </div>
     </nav>
 

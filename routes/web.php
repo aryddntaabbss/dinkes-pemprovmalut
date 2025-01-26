@@ -5,15 +5,24 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KategoriController;
+use App\Http\Controllers\ProfilController;
 use Illuminate\Support\Facades\Route;
+use App\Models\Profil;
+
+
+
 
 // Home Route
 Route::get('/', [HomeController::class, 'index'])->name('pages.index');
+Route::get('/profil/{slug}', function ($slug) {
+    $page = Profil::where('slug', $slug)->firstOrFail();
+    return view('pages.profil.index', compact('page'));
+});
 
 // Dashboard Routes (auth protected)
 Route::get('/dashboard', [DashboardController::class, 'index'])
     ->middleware(['auth', 'verified'])
-    ->name('dashboard.index');
+    ->name('index');
 
 // Berita Routes (auth protected)
 Route::middleware(['auth'])->prefix('berita')->name('berita.')->group(function () {
@@ -23,7 +32,7 @@ Route::middleware(['auth'])->prefix('berita')->name('berita.')->group(function (
     Route::get('/{berita}/edit', [BeritaController::class, 'edit'])->name('edit');
     Route::put('/{berita}', [BeritaController::class, 'update'])->name('update');
     Route::delete('/{berita}', [BeritaController::class, 'destroy'])->name('destroy');
-    Route::get('/berita/{id}', [BeritaController::class, 'show'])->name('show');
+    Route::get('/{berita}', [BeritaController::class, 'show'])->name('show');  // Disesuaikan dengan parameter 'berita'
     Route::put('/{berita}/up', [BeritaController::class, 'updateUp'])->name('update.up');
 });
 
@@ -36,6 +45,18 @@ Route::middleware(['auth'])->prefix('kategori')->name('kategori.')->group(functi
     Route::put('/{kategori}', [KategoriController::class, 'update'])->name('update');
     Route::delete('/{kategori}', [KategoriController::class, 'destroy'])->name('destroy');
     Route::get('/{kategori}', [KategoriController::class, 'show'])->name('show');
+});
+
+// Set-Profil Routes (auth protected)
+Route::prefix('set-profil')->middleware('auth')->group(function () {
+    // Page Routes 
+    Route::get('profil', [ProfilController::class, 'index'])->name('profil.index');
+    Route::get('profil/{profil}', [ProfilController::class, 'show'])->name('profil.show');
+    Route::get('/create', [ProfilController::class, 'create'])->name('profil.create');
+    Route::post('profil', [ProfilController::class, 'store'])->name('profil.store');
+    Route::get('profil/{profil}/edit', [ProfilController::class, 'edit'])->name('profil.edit');
+    Route::put('profil/{profil}', [ProfilController::class, 'update'])->name('profil.update');
+    Route::delete('profil/{profil}', [ProfilController::class, 'destroy'])->name('profil.destroy');
 });
 
 // Profile Routes (auth protected)

@@ -40,8 +40,8 @@
                             </td>
                             <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                 <!-- Tombol Edit -->
-                                <a href="{{ route('kategori.edit', $kat->id) }}"
-                                    class="text-blue-600 hover:text-blue-800">Edit</a>
+                                <a href="{{ route('kategori.edit', $kat->id) }}" class="inline-flex items-center px-3 py-1 text-sm font-medium text-yellow-600 bg-yellow-100 rounded-md
+                                hover:bg-yellow-200">Edit</a>
 
                                 <!-- Tombol Hapus -->
                                 <form action="{{ route('kategori.destroy', $kat->id) }}" method="POST"
@@ -49,7 +49,8 @@
                                     onsubmit="return confirm('Apakah Anda yakin ingin menghapus kategori ini?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="text-red-600 hover:text-red-800 ml-4">Hapus</button>
+                                    <button type="submit"
+                                        class="inline-flex items-center px-3 py-1 text-sm font-medium text-red-600 bg-red-100 rounded-md hover:bg-red-200">Hapus</button>
                                 </form>
                             </td>
                         </tr>

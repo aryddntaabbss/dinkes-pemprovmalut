@@ -3,6 +3,9 @@
     <p class="text-xl font-bold">Berita Terpopuler</p>
 
     <div class="space-y-4">
+        @if($beritaTerpopuler->isEmpty())
+        <p class="text-center py-3 border my-2 text-gray-500">Tidak ada berita terpopuler saat ini.</p>
+        @else
         @foreach($beritaTerpopuler as $item)
         <div class="flex items-center space-x-2 border-b py-2">
             <!-- Gambar -->
@@ -31,5 +34,6 @@
             </div>
         </div>
         @endforeach
+        @endif
     </div>
 </div>

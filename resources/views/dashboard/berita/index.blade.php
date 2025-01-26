@@ -80,16 +80,17 @@
                                     @method('PUT')
                                     <button type="submit"
                                         class="px-3 py-2 rounded-md text-white {{ $item->up_berita ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-600 hover:bg-gray-700' }}">
-                                        {{ $item->up_berita ? 'Populer' : 'Tidak Populer' }}
+                                        {!! $item->up_berita ? '<i class="fa-solid fa-eye"></i>' : '<i
+                                            class="fa-solid fa-eye-slash"></i>' !!}
                                     </button>
                                 </form>
                             </td>
 
                             <td class="flex justify-center items-center space-x-2 text-white font-semibold">
                                 <!-- Tombol Edit -->
-                                <a href="{{ route('berita.edit', $item->id) }}"
-                                    class="px-2 py-1 rounded-md bg-blue-600 hover:bg-blue-800" title="Edit">
-                                    <i class="fas fa-edit"></i>
+                                <a href="{{ route('berita.edit', $item->id) }}" class="inline-flex items-center px-3 py-1 text-sm font-medium text-yellow-600 bg-yellow-100 rounded-md
+                                    hover:bg-yellow-200" title="Edit">
+                                    Edit
                                 </a>
 
                                 <!-- Tombol Hapus -->
@@ -98,9 +99,10 @@
                                     onsubmit="return confirm('Apakah Anda yakin ingin menghapus berita ini?')">
                                     @csrf
                                     @method('DELETE')
-                                    <button type="submit" class="px-2 py-1 rounded-md bg-red-600 hover:bg-red-800"
+                                    <button type="submit"
+                                        class="inline-flex items-center px-3 py-1 text-sm font-medium text-red-600 bg-red-100 rounded-md hover:bg-red-200"
                                         title="Hapus">
-                                        <i class="fas fa-trash-alt"></i>
+                                        Hapus
                                     </button>
                                 </form>
                             </td>
