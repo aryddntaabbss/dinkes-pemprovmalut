@@ -8,6 +8,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\GaleriController;
+use App\Http\Controllers\VideoController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Profil;
 use App\Models\Informasi;
@@ -81,6 +82,14 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
     Route::delete('/galeri/{id}', [GaleriController::class, 'destroy'])->name('dashboard.galeri.destroy');
 });
 Route::get('/ragam/foto', [HomeController::class, 'galeri'])->name('pages.ragam.foto');
+
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('/videos', [VideoController::class, 'index'])->name('dashboard.videos.index');
+    Route::get('/videos/create', [VideoController::class, 'create'])->name('videos.create');
+    Route::post('/videos', [VideoController::class, 'store'])->name('dashboard.videos.store');
+    Route::delete('/videos/{id}', [VideoController::class, 'destroy'])->name('dashboard.videos.destroy');
+});
+Route::get('/ragam/video', [HomeController::class, 'video'])->name('pages.ragam.video');
 
 // Profile Routes (auth protected)
 Route::middleware('auth')->group(function () {

@@ -70,9 +70,10 @@
                             </x-dropdown-link>
 
                             <!-- Link untuk Vidio -->
-                            {{-- <x-dropdown-link :href="route('vidio.index')" :active="request()->routeIs('vidio.index')">
+                            <x-dropdown-link :href="route('dashboard.videos.index')"
+                                :active="request()->routeIs('dashboard.videos.index')">
                                 {{ __('Vidio') }}
-                            </x-dropdown-link> --}}
+                            </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
 

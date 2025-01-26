@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Kategori;
 use App\Models\Berita;
 use App\Models\Galeri;
+use App\Models\Video;
 
 class HomeController extends Controller
 {
@@ -33,6 +34,7 @@ class HomeController extends Controller
 
     public function blog()
     {
+        // Ambil 5 berita terpopuler untuk blog
         $beritaTerpopuler = Berita::where('up_berita', true)
             ->latest()
             ->take(5)
@@ -56,13 +58,13 @@ class HomeController extends Controller
             ? Galeri::all()
             : Galeri::where('category', $selectedCategory)->get();
 
-        // Cek apakah request berasal dari admin atau user umum
-        if ($request->is('dashboard/*')) {
-            // Untuk admin (folder dashboard)
-            return view('dashboard.ragam.foto', compact('categories', 'images', 'selectedCategory'));
-        } else {
-            // Untuk user umum (folder pages)
-            return view('pages.ragam.foto', compact('categories', 'images', 'selectedCategory'));
-        }
+        // Kirim data galeri ke view untuk user umum
+        return view('pages.ragam.foto', compact('categories', 'images', 'selectedCategory'));
+    }
+
+    public function video(Request $request)
+    {
+        $videos = Video::all();  // Ambil semua data video
+        return view('pages.ragam.vidio', compact('videos'));
     }
 }
