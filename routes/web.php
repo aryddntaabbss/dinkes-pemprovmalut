@@ -7,6 +7,7 @@ use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\InformasiController;
+use App\Http\Controllers\GaleriController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Profil;
 use App\Models\Informasi;
@@ -74,6 +75,12 @@ Route::prefix('set-informasi')->middleware('auth')->group(function () {
     Route::delete('informasi/{informasi}', [InformasiController::class, 'destroy'])->name('informasi.destroy');
 });
 
+Route::prefix('dashboard')->middleware(['auth'])->group(function () {
+    Route::get('/galeri', [GaleriController::class, 'index'])->name('dashboard.galeri.index');
+    Route::post('/galeri', [GaleriController::class, 'store'])->name('dashboard.galeri.store');
+    Route::delete('/galeri/{id}', [GaleriController::class, 'destroy'])->name('dashboard.galeri.destroy');
+});
+Route::get('/ragam/foto', [HomeController::class, 'galeri'])->name('pages.ragam.foto');
 
 // Profile Routes (auth protected)
 Route::middleware('auth')->group(function () {

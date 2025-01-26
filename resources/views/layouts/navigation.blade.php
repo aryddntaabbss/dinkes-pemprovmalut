@@ -47,6 +47,36 @@
                     <x-nav-link :href="route('informasi.index')" :active="request()->routeIs('informasi.index')">
                         {{ __('Informasi') }}
                     </x-nav-link>
+
+                    <!-- Static Dropdown: Kelola Ragam -->
+                    <x-dropdown align="left" width="48">
+                        <x-slot name="trigger">
+                            <button
+                                class="flex items-center px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 
+                            {{ request()->routeIs('foto.index') || request()->routeIs('vidio.index') ? 'text-gray-700' : '' }}">
+                                {{ __('Kelola Ragam') }}
+                                <svg class="ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                        </x-slot>
+                        <x-slot name="content">
+                            <!-- Link untuk Foto -->
+                            <x-dropdown-link :href="route('dashboard.galeri.index')"
+                                :active="request()->routeIs('dashboard.galeri.index')">
+                                {{ __('Foto') }}
+                            </x-dropdown-link>
+
+                            <!-- Link untuk Vidio -->
+                            {{-- <x-dropdown-link :href="route('vidio.index')" :active="request()->routeIs('vidio.index')">
+                                {{ __('Vidio') }}
+                            </x-dropdown-link> --}}
+                        </x-slot>
+                    </x-dropdown>
+
+
                 </div>
             </div>
 

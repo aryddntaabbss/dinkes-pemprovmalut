@@ -81,7 +81,7 @@
                 </button>
                 <!-- Ragam Content -->
                 <div class="absolute left-0 hidden mt-2 w-56 p-3 bg-white shadow-lg rounded-md group-hover:block z-50">
-                    <a href="#"
+                    <a href="/ragam/foto"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Foto</a>
                     <a href="#"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Vidio</a>
