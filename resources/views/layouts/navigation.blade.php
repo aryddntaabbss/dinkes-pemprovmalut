@@ -95,8 +95,9 @@
                         </x-slot>
                         <x-slot name="content">
                             <!-- Link untuk item -->
-                            <x-dropdown-link :href="route('index')" :active="request()->routeIs('index')">
-                                {{ __('Item') }}
+                            <x-dropdown-link :href="route('dashboard.prod-kesehatan.index')"
+                                :active="request()->routeIs('dashboard.prod-kesehatan.index')">
+                                {{ __('Produk Kesehatan') }}
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('index')" :active="request()->routeIs('index')">
                                 {{ __('Item') }}

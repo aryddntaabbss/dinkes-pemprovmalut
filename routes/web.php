@@ -9,6 +9,7 @@ use App\Http\Controllers\ProfilController;
 use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\VideoController;
+use App\Http\Controllers\DlProdkesController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Profil;
 use App\Models\Informasi;
@@ -76,6 +77,7 @@ Route::prefix('set-informasi')->middleware('auth')->group(function () {
     Route::delete('informasi/{informasi}', [InformasiController::class, 'destroy'])->name('informasi.destroy');
 });
 
+// Ragam Foto Routes (auth protected)
 Route::prefix('dashboard')->middleware(['auth'])->group(function () {
     Route::get('/galeri', [GaleriController::class, 'index'])->name('dashboard.galeri.index');
     Route::post('/galeri', [GaleriController::class, 'store'])->name('dashboard.galeri.store');
@@ -83,6 +85,7 @@ Route::prefix('dashboard')->middleware(['auth'])->group(function () {
 });
 Route::get('/ragam/foto', [HomeController::class, 'galeri'])->name('pages.ragam.foto');
 
+// Ragam Video Routes (auth protected)
 Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::get('/videos', [VideoController::class, 'index'])->name('dashboard.videos.index');
     Route::get('/videos/create', [VideoController::class, 'create'])->name('videos.create');
@@ -90,6 +93,15 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::delete('/videos/{id}', [VideoController::class, 'destroy'])->name('dashboard.videos.destroy');
 });
 Route::get('/ragam/video', [HomeController::class, 'video'])->name('pages.ragam.video');
+
+// Unduhan Prod-Kesehatan Routes (auth protected)
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('/prod-kesehatan', [DlProdkesController::class, 'index'])->name('dashboard.prod-kesehatan.index');
+    Route::get('/prod-kesehatan/create', [DlProdkesController::class, 'create'])->name('dashboard.prod-kesehatan.create');
+    Route::post('/prod-kesehatan', [DlProdkesController::class, 'store'])->name('dashboard.prod-kesehatan.store');
+    Route::delete('/prod-kesehatan/{id}', [DlProdkesController::class, 'destroy'])->name('dashboard.prod-kesehatan.destroy');
+});
+Route::get('/unduhan/prod-kesehatan', [HomeController::class, 'prodKes'])->name('pages.unduhan.prod-kesehatan');
 
 // Profile Routes (auth protected)
 Route::middleware('auth')->group(function () {

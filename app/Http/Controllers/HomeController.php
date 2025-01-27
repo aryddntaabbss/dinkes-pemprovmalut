@@ -7,6 +7,7 @@ use App\Models\Kategori;
 use App\Models\Berita;
 use App\Models\Galeri;
 use App\Models\Video;
+use App\Models\DlProdkes;
 
 class HomeController extends Controller
 {
@@ -66,5 +67,11 @@ class HomeController extends Controller
     {
         $videos = Video::all();  // Ambil semua data video
         return view('pages.ragam.vidio', compact('videos'));
+    }
+
+    public function prodKes()
+    {
+        $prodKesehatan = DlProdkes::all();
+        return view('pages.unduhan.prod-kesehatan', compact('prodKesehatan'));
     }
 }
