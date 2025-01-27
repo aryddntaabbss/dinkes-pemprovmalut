@@ -42,7 +42,7 @@ class DlRenstraController extends Controller
             'file' => 'required|file|mimes:pdf,doc,docx,txt|max:2048',
         ]);
 
-        $path = $request->file('file')->store('profkes');
+        $path = $request->file('file')->store('renstra');
 
         DlRenstra::create([
             'nama' => $request->nama,
@@ -60,9 +60,9 @@ class DlRenstraController extends Controller
      */
     public function destroy($id)
     {
-        $profkes = DlRenstra::findOrFail($id);
-        Storage::delete($profkes->file_path);
-        $profkes->delete();
+        $renstra = DlRenstra::findOrFail($id);
+        Storage::delete($renstra->file_path);
+        $renstra->delete();
 
         return redirect()->route('dashboard.renstra.index')->with('success', 'Renstra berhasil dihapus.');
     }
