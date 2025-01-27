@@ -9,6 +9,7 @@ use App\Models\Galeri;
 use App\Models\Video;
 use App\Models\DlProdkes;
 use App\Models\DlProfkes;
+use App\Models\DlRenstra;
 
 class HomeController extends Controller
 {
@@ -80,5 +81,11 @@ class HomeController extends Controller
     {
         $profKesehatan = DlProfkes::all();
         return view('pages.unduhan.prof-kesehatan', compact('profKesehatan'));
+    }
+
+    public function renstra()
+    {
+        $renstra = DlRenstra::all();
+        return view('pages.unduhan.renstra', compact('renstra'));
     }
 }

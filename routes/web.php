@@ -11,6 +11,7 @@ use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\DlProdkesController;
 use App\Http\Controllers\DlProfkesController;
+use App\Http\Controllers\DlRenstraController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Profil;
 use App\Models\Informasi;
@@ -112,6 +113,15 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::delete('/prof-kesehatan/{id}', [DlProfkesController::class, 'destroy'])->name('dashboard.prof-kesehatan.destroy');
 });
 Route::get('/unduhan/prof-kesehatan', [HomeController::class, 'profKes'])->name('pages.unduhan.prof-kesehatan');
+
+// Unduhan Renstra Routes (auth protected)
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('/renstra', [DlRenstraController::class, 'index'])->name('dashboard.renstra.index');
+    Route::get('/renstra/create', [DlRenstraController::class, 'create'])->name('dashboard.renstra.create');
+    Route::post('/renstra', [DlRenstraController::class, 'store'])->name('dashboard.renstra.store');
+    Route::delete('/renstra/{id}', [DlRenstraController::class, 'destroy'])->name('dashboard.renstra.destroy');
+});
+Route::get('/unduhan/renstra', [HomeController::class, 'renstra'])->name('pages.unduhan.renstra');
 
 // Profile Routes (auth protected)
 Route::middleware('auth')->group(function () {
