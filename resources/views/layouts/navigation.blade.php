@@ -6,17 +6,18 @@
                 <!-- Logo -->
                 <a href="{{ route('index') }}" class="shrink-0 flex items-center space-x-2 px-5">
                     <img class="h-10 w-auto" src="{{ asset('images/logo.png') }}" alt="Logo">
-                    <h2 class="text-md w-48 font-semibold text-gray-800">Dinas Kesehatan Provinsi Maluku Utara</h2>
+                    <h2 class="md:hidden text-md w-48 font-semibold text-gray-800">Dinas Kesehatan Provinsi Maluku Utara
+                    </h2>
                 </a>
 
                 <!-- Navigation Links -->
-                <div class="hidden sm:flex sm:space-x-8">
+                <div class="hidden sm:flex sm:space-x-5">
                     <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
                     <!-- Static Dropdown: Kelola Artikel -->
-                    <x-dropdown align="left" width="48">
+                    <x-dropdown align="center" width="48">
                         <x-slot name="trigger">
                             <button
                                 class="flex items-center px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 
@@ -40,16 +41,18 @@
                         </x-slot>
                     </x-dropdown>
 
-                    <x-nav-link :href="route('profil.index')" :active="request()->routeIs('profil.index')">
+                    <x-nav-link align="center" width="48" :href="route('profil.index')"
+                        :active="request()->routeIs('profil.index')">
                         {{ __('Profil') }}
                     </x-nav-link>
 
-                    <x-nav-link :href="route('informasi.index')" :active="request()->routeIs('informasi.index')">
+                    <x-nav-link align="center" width="48" :href="route('informasi.index')"
+                        :active="request()->routeIs('informasi.index')">
                         {{ __('Informasi') }}
                     </x-nav-link>
 
                     <!-- Static Dropdown: Kelola Ragam -->
-                    <x-dropdown align="left" width="48">
+                    <x-dropdown align="center" width="48">
                         <x-slot name="trigger">
                             <button
                                 class="flex items-center px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 
@@ -77,7 +80,39 @@
                         </x-slot>
                     </x-dropdown>
 
+                    <!-- Static Dropdown: Kelola Unduhan -->
+                    <x-dropdown align="center" width="48">
+                        <x-slot name="trigger">
+                            <button class="flex items-center px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 
+                            {{ request()->routeIs('/') || request()->routeIs('/') ? 'text-gray-700' : '' }}">
+                                {{ __('Kelola Unduhan') }}
+                                <svg class="ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                        </x-slot>
+                        <x-slot name="content">
+                            <!-- Link untuk item -->
+                            <x-dropdown-link :href="route('index')" :active="request()->routeIs('index')">
+                                {{ __('Item') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('index')" :active="request()->routeIs('index')">
+                                {{ __('Item') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('index')" :active="request()->routeIs('index')">
+                                {{ __('Item') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('index')" :active="request()->routeIs('index')">
+                                {{ __('Item') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('index')" :active="request()->routeIs('index')">
+                                {{ __('Item') }}
+                            </x-dropdown-link>
 
+                        </x-slot>
+                    </x-dropdown>
                 </div>
             </div>
 
