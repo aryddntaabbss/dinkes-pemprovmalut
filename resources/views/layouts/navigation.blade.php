@@ -111,8 +111,9 @@
                                 :active="request()->routeIs('dashboard.lakip.index')">
                                 {{ __('Lakip') }}
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('index')" :active="request()->routeIs('index')">
-                                {{ __('Item') }}
+                            <x-dropdown-link :href="route('dashboard.doc-lainx.index')"
+                                :active="request()->routeIs('dashboard.doc-lainx.index')">
+                                {{ __('Dokumen Lainnya') }}
                             </x-dropdown-link>
 
                         </x-slot>

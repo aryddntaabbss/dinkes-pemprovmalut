@@ -13,6 +13,7 @@ use App\Http\Controllers\DlProdkesController;
 use App\Http\Controllers\DlProfkesController;
 use App\Http\Controllers\DlRenstraController;
 use App\Http\Controllers\DlLakipController;
+use App\Http\Controllers\DlDocLainxController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Profil;
 use App\Models\Informasi;
@@ -132,6 +133,15 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::delete('/lakip/{id}', [DlLakipController::class, 'destroy'])->name('dashboard.lakip.destroy');
 });
 Route::get('/unduhan/lakip', [HomeController::class, 'lakip'])->name('pages.unduhan.lakip');
+
+// Unduhan Dokumen Lainnya Routes (auth protected)
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('/doc-lainx', [DlDocLainxController::class, 'index'])->name('dashboard.doc-lainx.index');
+    Route::get('/doc-lainx/create', [DlDocLainxController::class, 'create'])->name('dashboard.doc-lainx.create');
+    Route::post('/doc-lainx', [DlDocLainxController::class, 'store'])->name('dashboard.doc-lainx.store');
+    Route::delete('/doc-lainx/{id}', [DlDocLainxController::class, 'destroy'])->name('dashboard.doc-lainx.destroy');
+});
+Route::get('/unduhan/doc-lainx', [HomeController::class, 'docLainx'])->name('pages.unduhan.doc-lainx');
 
 // Profile Routes (auth protected)
 Route::middleware('auth')->group(function () {

@@ -11,6 +11,7 @@ use App\Models\DlProdkes;
 use App\Models\DlProfkes;
 use App\Models\DlRenstra;
 use App\Models\DlLakip;
+use App\Models\DlDocLainx;
 
 class HomeController extends Controller
 {
@@ -94,5 +95,11 @@ class HomeController extends Controller
     {
         $lakip = DlLakip::all();
         return view('pages.unduhan.lakip', compact('lakip'));
+    }
+
+    public function docLainx()
+    {
+        $docLainx = DlDocLainx::all();
+        return view('pages.unduhan.doc-lainx', compact('docLainx'));
     }
 }
