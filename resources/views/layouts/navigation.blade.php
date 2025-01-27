@@ -107,8 +107,9 @@
                                 :active="request()->routeIs('dashboard.renstra.index')">
                                 {{ __('Renstra') }}
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('index')" :active="request()->routeIs('index')">
-                                {{ __('Item') }}
+                            <x-dropdown-link :href="route('dashboard.lakip.index')"
+                                :active="request()->routeIs('dashboard.lakip.index')">
+                                {{ __('Lakip') }}
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('index')" :active="request()->routeIs('index')">
                                 {{ __('Item') }}

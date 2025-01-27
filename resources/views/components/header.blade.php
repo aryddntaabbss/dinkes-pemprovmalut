@@ -110,7 +110,7 @@
                         Kesehatan</a>
                     <a href="/unduhan/renstra"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Renstra</a>
-                    <a href="#"
+                    <a href="/unduhan/lakip"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Lakip</a>
                     <a href="#"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Dokumen

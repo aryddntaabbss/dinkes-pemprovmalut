@@ -12,6 +12,7 @@ use App\Http\Controllers\VideoController;
 use App\Http\Controllers\DlProdkesController;
 use App\Http\Controllers\DlProfkesController;
 use App\Http\Controllers\DlRenstraController;
+use App\Http\Controllers\DlLakipController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Profil;
 use App\Models\Informasi;
@@ -122,6 +123,15 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::delete('/renstra/{id}', [DlRenstraController::class, 'destroy'])->name('dashboard.renstra.destroy');
 });
 Route::get('/unduhan/renstra', [HomeController::class, 'renstra'])->name('pages.unduhan.renstra');
+
+// Unduhan Lakip Routes (auth protected)
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('/lakip', [DlLakipController::class, 'index'])->name('dashboard.lakip.index');
+    Route::get('/lakip/create', [DlLakipController::class, 'create'])->name('dashboard.lakip.create');
+    Route::post('/lakip', [DlLakipController::class, 'store'])->name('dashboard.lakip.store');
+    Route::delete('/lakip/{id}', [DlLakipController::class, 'destroy'])->name('dashboard.lakip.destroy');
+});
+Route::get('/unduhan/lakip', [HomeController::class, 'lakip'])->name('pages.unduhan.lakip');
 
 // Profile Routes (auth protected)
 Route::middleware('auth')->group(function () {

@@ -10,6 +10,7 @@ use App\Models\Video;
 use App\Models\DlProdkes;
 use App\Models\DlProfkes;
 use App\Models\DlRenstra;
+use App\Models\DlLakip;
 
 class HomeController extends Controller
 {
@@ -87,5 +88,11 @@ class HomeController extends Controller
     {
         $renstra = DlRenstra::all();
         return view('pages.unduhan.renstra', compact('renstra'));
+    }
+
+    public function lakip()
+    {
+        $lakip = DlLakip::all();
+        return view('pages.unduhan.lakip', compact('lakip'));
     }
 }
