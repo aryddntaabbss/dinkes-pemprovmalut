@@ -6,7 +6,7 @@
                 <!-- Logo -->
                 <a href="{{ route('index') }}" class="shrink-0 flex items-center space-x-2 px-5">
                     <img class="h-10 w-auto" src="{{ asset('images/logo.png') }}" alt="Logo">
-                    <h2 class="md:hidden text-md w-48 font-semibold text-gray-800">Dinas Kesehatan Provinsi Maluku Utara
+                    <h2 class=" text-sm w-48 font-semibold text-gray-800">Dinas Kesehatan Provinsi Maluku Utara
                     </h2>
                 </a>
 
@@ -49,6 +49,11 @@
                     <x-nav-link align="center" width="48" :href="route('informasi.index')"
                         :active="request()->routeIs('informasi.index')">
                         {{ __('Informasi') }}
+                    </x-nav-link>
+
+                    <x-nav-link align="center" width="48" :href="route('data-kesehatan.index')"
+                        :active="request()->routeIs('data-kesehatan.index')">
+                        {{ __('Data Kesehatan') }}
                     </x-nav-link>
 
                     <!-- Static Dropdown: Kelola Ragam -->

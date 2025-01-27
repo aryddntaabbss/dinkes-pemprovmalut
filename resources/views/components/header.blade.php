@@ -60,12 +60,36 @@
                 <div class="absolute left-0 hidden mt-2 w-56 p-3 bg-white shadow-lg rounded-md group-hover:block z-50">
                     @if(isset($informasilMenus) && $informasilMenus->count() > 0)
                     @foreach($informasilMenus as $menu)
-                    {{-- <a href="{{ $menu->url }}">{{ $menu->name }}</a> --}}
                     <a href="{{ url('/informasi/'.$menu->slug) }}"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">{{ $menu->name }}</a>
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">
+                        {{ $menu->name }}
+                    </a>
                     @endforeach
+
+                    <!-- Ragam Menu -->
+                    <div class="relative group">
+                        <a
+                            class="flex justify-between w-full px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">
+                            Ragam
+                            <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"
+                                viewBox="0 0 24 24" aria-hidden="true">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                            </svg>
+                        </a>
+                        <!-- Ragam Content -->
+                        <div
+                            class="absolute left-52 hidden mt-2 w-40 p-3 bg-white shadow-lg rounded-md group-hover:block z-50">
+                            {{-- @elif(isset($dakesMenus) && $dakesMenus->count() > 0) --}}
+                            @foreach($dakesMenus as $menu)
+                            <a href="{{ url('/data-kesehatan/'.$menu->slug) }}"
+                                class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">
+                                {{ $menu->name }}
+                            </a>
+                            @endforeach
+                        </div>
+                    </div>
                     @else
-                    <p>No menu available</p>
+                    <p class="text-center text-gray-600">No menu available</p>
                     @endif
                 </div>
             </div>
