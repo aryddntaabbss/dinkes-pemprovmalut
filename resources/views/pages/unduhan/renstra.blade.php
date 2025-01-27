@@ -15,7 +15,7 @@
 
                 <!-- Search Bar -->
                 <div class="mb-6">
-                    <input type="text" id="search" placeholder="Cari profil berdasarkan nama"
+                    <input type="text" id="search" placeholder="Cari renstra berdasarkan nama"
                         class="w-full py-2 px-4 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
                         oninput="filterProducts()">
                 </div>
