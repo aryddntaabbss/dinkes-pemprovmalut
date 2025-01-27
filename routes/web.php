@@ -10,6 +10,7 @@ use App\Http\Controllers\InformasiController;
 use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\VideoController;
 use App\Http\Controllers\DlProdkesController;
+use App\Http\Controllers\DlProfkesController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Profil;
 use App\Models\Informasi;
@@ -102,6 +103,15 @@ Route::prefix('dashboard')->middleware('auth')->group(function () {
     Route::delete('/prod-kesehatan/{id}', [DlProdkesController::class, 'destroy'])->name('dashboard.prod-kesehatan.destroy');
 });
 Route::get('/unduhan/prod-kesehatan', [HomeController::class, 'prodKes'])->name('pages.unduhan.prod-kesehatan');
+
+// Unduhan Prof-Kesehatan Routes (auth protected)
+Route::prefix('dashboard')->middleware('auth')->group(function () {
+    Route::get('/prof-kesehatan', [DlProfkesController::class, 'index'])->name('dashboard.prof-kesehatan.index');
+    Route::get('/prof-kesehatan/create', [DlProfkesController::class, 'create'])->name('dashboard.prof-kesehatan.create');
+    Route::post('/prof-kesehatan', [DlProfkesController::class, 'store'])->name('dashboard.prof-kesehatan.store');
+    Route::delete('/prof-kesehatan/{id}', [DlProfkesController::class, 'destroy'])->name('dashboard.prof-kesehatan.destroy');
+});
+Route::get('/unduhan/prof-kesehatan', [HomeController::class, 'profKes'])->name('pages.unduhan.prof-kesehatan');
 
 // Profile Routes (auth protected)
 Route::middleware('auth')->group(function () {

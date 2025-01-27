@@ -8,6 +8,7 @@ use App\Models\Berita;
 use App\Models\Galeri;
 use App\Models\Video;
 use App\Models\DlProdkes;
+use App\Models\DlProfkes;
 
 class HomeController extends Controller
 {
@@ -73,5 +74,11 @@ class HomeController extends Controller
     {
         $prodKesehatan = DlProdkes::all();
         return view('pages.unduhan.prod-kesehatan', compact('prodKesehatan'));
+    }
+
+    public function profKes()
+    {
+        $profKesehatan = DlProfkes::all();
+        return view('pages.unduhan.prof-kesehatan', compact('profKesehatan'));
     }
 }

@@ -99,8 +99,9 @@
                                 :active="request()->routeIs('dashboard.prod-kesehatan.index')">
                                 {{ __('Produk Kesehatan') }}
                             </x-dropdown-link>
-                            <x-dropdown-link :href="route('index')" :active="request()->routeIs('index')">
-                                {{ __('Item') }}
+                            <x-dropdown-link :href="route('dashboard.prof-kesehatan.index')"
+                                :active="request()->routeIs('dashboard.prof-kesehatan.index')">
+                                {{ __('Tips Kesehatan') }}
                             </x-dropdown-link>
                             <x-dropdown-link :href="route('index')" :active="request()->routeIs('index')">
                                 {{ __('Item') }}

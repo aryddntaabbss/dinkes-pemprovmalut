@@ -105,11 +105,11 @@
                     <a href="/unduhan/prod-kesehatan"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Produk
                         Kesehatan</a>
-                    <a href="#"
+                    <a href="/unduhan/prof-kesehatan"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Tips
                         Kesehatan</a>
                     <a href="#"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Restra</a>
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Renstra</a>
                     <a href="#"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Lakip</a>
                     <a href="#"
