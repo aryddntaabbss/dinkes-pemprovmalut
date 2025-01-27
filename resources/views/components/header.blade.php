@@ -25,7 +25,7 @@
             <a href="/" class="text-sm font-semibold text-white hover:text-gray-200">Beranda</a>
 
             <!-- Profil Menu -->
-            <div class="relative group">
+            <div class="relative dropdown">
                 <button class="text-sm font-semibold text-white flex items-center hover:text-gray-200">
                     Profil
                     <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
@@ -33,13 +33,11 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                <!-- Profil Content -->
-                <div class="absolute left-0 hidden mt-2 w-56 p-3 bg-white shadow-lg rounded-md group-hover:block z-50">
+                <div class="dropdown-menu absolute left-0 mt-2 w-56 p-3 bg-white shadow-lg rounded-md hidden z-50">
                     @if(isset($profilMenus) && $profilMenus->count() > 0)
                     @foreach($profilMenus as $menu)
-                    {{-- <a href="{{ $menu->url }}">{{ $menu->name }}</a> --}}
                     <a href="{{ url('/profil/'.$menu->slug) }}"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">{{ $menu->name }}</a>
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">{{ $menu->name }}</a>
                     @endforeach
                     @else
                     <p>No menu available</p>
@@ -48,7 +46,7 @@
             </div>
 
             <!-- Informasi Menu -->
-            <div class="relative group">
+            <div class="relative dropdown">
                 <button class="text-sm font-semibold text-white flex items-center hover:text-gray-200">
                     Informasi
                     <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
@@ -56,30 +54,24 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                <!-- Profil Content -->
-                <div class="absolute left-0 hidden mt-2 w-56 p-3 bg-white shadow-lg rounded-md group-hover:block z-50">
+                <div class="dropdown-menu absolute left-0 mt-2 w-56 p-3 bg-white shadow-lg rounded-md hidden z-50">
                     @if(isset($informasilMenus) && $informasilMenus->count() > 0)
                     @foreach($informasilMenus as $menu)
                     <a href="{{ url('/informasi/'.$menu->slug) }}"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">
-                        {{ $menu->name }}
-                    </a>
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">{{ $menu->name }}</a>
                     @endforeach
 
-                    <!-- Ragam Menu -->
-                    <div class="relative group">
-                        <a
+                    <!-- Data Kesehatan Dropdown -->
+                    <div class="relative dropdown">
+                        <button
                             class="flex justify-between w-full px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">
-                            Ragam
+                            Data Kesehatan
                             <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="2"
                                 viewBox="0 0 24 24" aria-hidden="true">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                             </svg>
-                        </a>
-                        <!-- Ragam Content -->
-                        <div
-                            class="absolute left-52 hidden mt-2 w-40 p-3 bg-white shadow-lg rounded-md group-hover:block z-50">
-                            {{-- @elif(isset($dakesMenus) && $dakesMenus->count() > 0) --}}
+                        </button>
+                        <div class="dropdown-menu absolute mt-4 w-full p-2 bg-white shadow-lg rounded-md hidden z-50">
                             @foreach($dakesMenus as $menu)
                             <a href="{{ url('/data-kesehatan/'.$menu->slug) }}"
                                 class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">
@@ -88,6 +80,7 @@
                             @endforeach
                         </div>
                     </div>
+
                     @else
                     <p class="text-center text-gray-600">No menu available</p>
                     @endif
@@ -95,7 +88,7 @@
             </div>
 
             <!-- Ragam Menu -->
-            <div class="relative group">
+            <div class="relative dropdown">
                 <button class="text-sm font-semibold text-white flex items-center hover:text-gray-200">
                     Ragam
                     <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
@@ -103,20 +96,19 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                <!-- Ragam Content -->
-                <div class="absolute left-0 hidden mt-2 w-56 p-3 bg-white shadow-lg rounded-md group-hover:block z-50">
+                <div class="dropdown-menu absolute left-0 hidden mt-2 w-56 p-3 bg-white shadow-lg rounded-md z-50">
                     <a href="/ragam/foto"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Foto</a>
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Foto</a>
                     <a href="/ragam/video"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Vidio</a>
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Vidio</a>
                     <a href="/"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Forum
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Forum
                         Konsultasi</a>
                 </div>
             </div>
 
             <!-- Unduh Menu -->
-            <div class="relative group">
+            <div class="relative dropdown">
                 <button class="text-sm font-semibold text-white flex items-center hover:text-gray-200">
                     Unduh
                     <svg class="ml-2 h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
@@ -124,26 +116,24 @@
                         <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
-                <!-- Unduh Content -->
-                <div class="absolute right-0 hidden mt-2 w-56 p-3 bg-white shadow-lg rounded-md group-hover:block z-50">
+                <div class="dropdown-menu absolute right-0 hidden mt-2 w-56 p-3 bg-white shadow-lg rounded-md z-50">
                     <a href="/unduhan/prod-kesehatan"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Produk
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Produk
                         Kesehatan</a>
                     <a href="/unduhan/prof-kesehatan"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Tips
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Tips
                         Kesehatan</a>
                     <a href="/unduhan/renstra"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Renstra</a>
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Renstra</a>
                     <a href="/unduhan/lakip"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Lakip</a>
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Lakip</a>
                     <a href="/unduhan/doc-lainx"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white  hover:bg-teal-500">Dokumen
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Dokumen
                         Lainnya</a>
                 </div>
             </div>
 
             <a href="#" class="text-sm font-semibold text-white hover:text-gray-200">Kontak Kami</a>
-
         </div>
     </nav>
 
@@ -167,97 +157,63 @@
             <div class="mt-6 flow-root bg-white px-6">
                 <div class="-my-6 divide-y divide-gray-500/10">
                     <div class="space-y-2 py-6">
-                        <a href="#"
+                        <a href="/"
                             class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-black hover:bg-teal-500">Beranda</a>
 
                         <!-- Profil Menu -->
                         <div class="relative group">
                             <a
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-black hover:bg-teal-500">
-                                Profil
-                            </a>
-                            <!-- Profil Content -->
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-black hover:bg-teal-500">Profil</a>
                             <div
                                 class="absolute left-0 hidden mt-2 p-3 w-full bg-white shadow-lg rounded-md group-hover:block z-50">
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Selayang
-                                    Pandang</a>
-                                <a href="#" class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Visi
-                                    Misi</a>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Tugas dan
-                                    Fungsi</a>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Struktur
-                                    Organisasi</a>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">UPTD</a>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Profil
-                                    Pejabat</a>
+                                @if(isset($profilMenus) && $profilMenus->count() > 0)
+                                @foreach($profilMenus as $menu)
+                                <a href="{{ url('/profil/'.$menu->slug) }}"
+                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">{{ $menu->name }}</a>
+                                @endforeach
+                                @else
+                                <p>No menu available</p>
+                                @endif
                             </div>
                         </div>
 
                         <!-- Informasi Menu -->
                         <div class="relative group">
                             <a
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-black hover:bg-teal-500">
-                                Informasi
-                            </a>
-                            <!-- Informasi Content -->
-                            <div class="hidden mt-2 bg-gray-50 rounded-lg p-2 group-hover:block">
-                                <a href="#" class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">
-                                    Berita dan Informasi
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-black hover:bg-teal-500">Informasi</a>
+                            <div class="hidden mt-2 bg-gray-100 shadow-lg rounded-md group-hover:block z-50">
+                                @if(isset($informasilMenus) && $informasilMenus->count() > 0)
+                                @foreach($informasilMenus as $menu)
+                                <a href="{{ url('/informasi/'.$menu->slug) }}"
+                                    class="block px-4 py-2 text-base rounded-md text-black hover:bg-teal-500">{{ $menu->name }}</a>
+                                @endforeach
+
+
+                                <!-- Data Kesehatan -->
+                                @foreach($dakesMenus as $menu)
+                                <a href="{{ url('/data-kesehatan/'.$menu->slug) }}"
+                                    class="block px-4 py-2 text-base rounded-md text-black hover:bg-teal-500">
+                                    {{ $menu->name }}
                                 </a>
-                                <a href="#" class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">
-                                    Tips Kesehatan
-                                </a>
-                                <!-- Data Kesehatan Dropdown -->
-                                <div class="relative">
-                                    <button onclick="toggleDataKesehatan()"
-                                        class="w-full flex justify-between items-center px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">
-                                        Data Kesehatan
-                                        <svg class="w-4 h-4 transition-transform" id="dataKesehatanIcon" fill="none"
-                                            stroke="currentColor" viewBox="0 0 24 24">
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 9l-7 7-7-7"></path>
-                                        </svg>
-                                    </button>
-                                    <div id="dataKesehatanDropdown" class="hidden pl-4 mt-1">
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Sekretariat</a>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Bidang
-                                            Kesmas</a>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Bidang
-                                            P2</a>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Bidang
-                                            Yankes</a>
-                                        <a href="#"
-                                            class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Bidang
-                                            SDK</a>
-                                    </div>
-                                </div>
+                                @endforeach
+                                @else
+                                <p class="text-center text-gray-600">No menu available</p>
+                                @endif
                             </div>
                         </div>
 
                         <!-- Ragam Menu -->
                         <div class="relative group">
                             <a
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-black hover:bg-teal-500">
-                                Ragam
-                            </a>
-                            <!-- Ragam Content -->
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-black hover:bg-teal-500">Ragam</a>
                             <div
-                                class="absolute left-0 hidden mt-2 p-3 w-full bg-white shadow-lg rounded-md group-hover:block z-50">
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Foto</a>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Vidio</a>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Forum
+                                class="absolute left-0 hidden mt-2 w-full bg-white shadow-lg rounded-md group-hover:block z-50">
+                                <a href="/ragam/foto"
+                                    class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Foto</a>
+                                <a href="/ragam/video"
+                                    class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Vidio</a>
+                                <a href="/"
+                                    class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Forum
                                     Konsultasi</a>
                             </div>
                         </div>
@@ -265,23 +221,20 @@
                         <!-- Unduh Menu -->
                         <div class="relative group">
                             <a
-                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-black hover:bg-teal-500">
-                                Unduh
-                            </a>
-                            <!-- Unduh Content -->
-                            <div
-                                class="absolute left-0 hidden mt-2 p-3 w-full bg-white shadow-lg rounded-md group-hover:block z-50">
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Produk
+                                class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-black hover:bg-teal-500">Unduh</a>
+                            <div class="hidden mt-2 p-3 w-full bg-white shadow-lg rounded-md group-hover:block z-50">
+                                <a href="/unduhan/prod-kesehatan"
+                                    class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Produk
                                     Kesehatan</a>
-                                <a href="#" class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Tips
+                                <a href="/unduhan/prof-kesehatan"
+                                    class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Tips
                                     Kesehatan</a>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Restra</a>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Lakip</a>
-                                <a href="#"
-                                    class="block px-4 py-2 text-sm rounded-lg text-black hover:bg-teal-500">Dokumen
+                                <a href="/unduhan/renstra"
+                                    class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Renstra</a>
+                                <a href="/unduhan/lakip"
+                                    class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Lakip</a>
+                                <a href="/unduhan/doc-lainx"
+                                    class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Dokumen
                                     Lainnya</a>
                             </div>
                         </div>
@@ -297,6 +250,23 @@
 </header>
 
 <script>
+    document.querySelectorAll('.dropdown').forEach(function(dropdown) {
+    const button = dropdown.querySelector('button');
+    const menu = dropdown.querySelector('.dropdown-menu');
+    
+    button.addEventListener('click', function() {
+    // Toggle the visibility of the dropdown menu
+    menu.classList.toggle('hidden');
+    });
+    
+    // Close dropdown if clicked outside
+    document.addEventListener('click', function(event) {
+    if (!dropdown.contains(event.target)) {
+    menu.classList.add('hidden');
+    }
+    });
+    });
+
     // Script to toggle the mobile menu
     const mobileMenu = document.getElementById('mobile-menu');
     const openMenuButton = document.getElementById('open-menu');
@@ -309,13 +279,4 @@
     closeMenuButton.addEventListener('click', () => {
         mobileMenu.classList.add('hidden');
     });
-
-// Script untuk toggle Data Kesehatan
-    function toggleDataKesehatan() {
-    const dropdown = document.getElementById('dataKesehatanDropdown');
-    const icon = document.getElementById('dataKesehatanIcon');
-    
-    dropdown.classList.toggle('hidden');
-    icon.style.transform = dropdown.classList.contains('hidden') ? 'rotate(0deg)' : 'rotate(180deg)';
-}
 </script>

@@ -43,7 +43,7 @@ class DtaKesehatanController extends Controller
 
         DtaKesehatan::create($validatedData);
 
-        return redirect()->route('data-kesehatan.index')->with('success', 'Halaman data kesehatan berhasil ditambahkan.');
+        return redirect()->route('informasi.index')->with('success', 'Halaman data kesehatan berhasil ditambahkan.');
     }
 
     // Mengupdate halaman data kesehatan
@@ -60,7 +60,7 @@ class DtaKesehatanController extends Controller
 
         $dtakesehatan->update($validatedData);
 
-        return redirect()->route('data-kesehatan.index')->with('success', 'Halaman data kesehatan berhasil diperbarui!');
+        return redirect()->route('informasi.index')->with('success', 'Halaman data kesehatan berhasil diperbarui!');
     }
 
     // Menampilkan form untuk mengedit halaman data kesehatan
@@ -76,6 +76,6 @@ class DtaKesehatanController extends Controller
         $dtakesehatan = DtaKesehatan::findOrFail($id);
         $dtakesehatan->delete();
 
-        return redirect()->route('data-kesehatan.index')->with('success', 'Halaman data kesehatan berhasil dihapus');
+        return redirect()->route('informasi.index')->with('success', 'Halaman data kesehatan berhasil dihapus');
     }
 }

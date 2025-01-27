@@ -102,7 +102,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     // Galeri Management
-    Route::prefix('dashboard')->group(function () {
+    Route::prefix('dashboard/ragam')->group(function () {
         Route::get('/galeri', [GaleriController::class, 'index'])->name('dashboard.galeri.index');
         Route::post('/galeri', [GaleriController::class, 'store'])->name('dashboard.galeri.store');
         Route::delete('/galeri/{id}', [GaleriController::class, 'destroy'])->name('dashboard.galeri.destroy');
@@ -112,7 +112,9 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/videos/create', [VideoController::class, 'create'])->name('videos.create');
         Route::post('/videos', [VideoController::class, 'store'])->name('dashboard.videos.store');
         Route::delete('/videos/{id}', [VideoController::class, 'destroy'])->name('dashboard.videos.destroy');
+    });
 
+    Route::prefix('dashboard/unduhan')->group(function () {
         // Prod-Kesehatan Management
         Route::get('/prod-kesehatan', [DlProdkesController::class, 'index'])->name('dashboard.prod-kesehatan.index');
         Route::get('/prod-kesehatan/create', [DlProdkesController::class, 'create'])->name('dashboard.prod-kesehatan.create');

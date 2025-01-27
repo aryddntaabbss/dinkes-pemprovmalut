@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Informasi;
+use App\Models\DtaKesehatan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 
@@ -12,7 +13,8 @@ class InformasiController extends Controller
     public function index()
     {
         return view('dashboard.set-informasi.pages', [
-            'informasi' => Informasi::latest()->get()
+            'informasi' => Informasi::latest()->get(),
+            'dtakesehatan' => DtaKesehatan::latest()->get()
         ]);
     }
 

@@ -2,26 +2,29 @@
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
+            <!-- Logo and Navigation Links -->
             <div class="flex items-center">
                 <!-- Logo -->
                 <a href="{{ route('index') }}" class="shrink-0 flex items-center space-x-2 px-5">
                     <img class="h-10 w-auto" src="{{ asset('images/logo.png') }}" alt="Logo">
-                    <h2 class=" text-sm w-48 font-semibold text-gray-800">Dinas Kesehatan Provinsi Maluku Utara
-                    </h2>
+                    <h2 class="text-sm w-48 font-semibold text-gray-800">Dinas Kesehatan Provinsi Maluku Utara</h2>
                 </a>
 
                 <!-- Navigation Links -->
-                <div class="hidden sm:flex sm:space-x-5">
-                    <x-nav-link :href="route('index')" :active="request()->routeIs('index')">
+                <div class="hidden sm:flex sm:space-x-2">
+                    <x-nav-link :href="route('index')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
 
-                    <!-- Static Dropdown: Kelola Artikel -->
-                    <x-dropdown align="center" width="48">
+                    <x-nav-link :href="route('profil.index')">
+                        {{ __('Profil') }}
+                    </x-nav-link>
+
+                    <!-- Dropdown: Kelola Artikel -->
+                    <x-dropdown align="center" width="44">
                         <x-slot name="trigger">
                             <button
-                                class="flex items-center px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 
-                                {{ request()->routeIs('berita.index') || request()->routeIs('kategori.index') ? 'text-gray-700' : '' }}">
+                                class="flex items-center px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">
                                 {{ __('Kelola Artikel') }}
                                 <svg class="ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
@@ -41,27 +44,36 @@
                         </x-slot>
                     </x-dropdown>
 
-                    <x-nav-link align="center" width="48" :href="route('profil.index')"
-                        :active="request()->routeIs('profil.index')">
-                        {{ __('Profil') }}
-                    </x-nav-link>
-
-                    <x-nav-link align="center" width="48" :href="route('informasi.index')"
-                        :active="request()->routeIs('informasi.index')">
-                        {{ __('Informasi') }}
-                    </x-nav-link>
-
-                    <x-nav-link align="center" width="48" :href="route('data-kesehatan.index')"
-                        :active="request()->routeIs('data-kesehatan.index')">
-                        {{ __('Data Kesehatan') }}
-                    </x-nav-link>
-
-                    <!-- Static Dropdown: Kelola Ragam -->
-                    <x-dropdown align="center" width="48">
+                    <!-- Dropdown: Kelola Informasi -->
+                    <x-dropdown align="center" width="44">
                         <x-slot name="trigger">
                             <button
-                                class="flex items-center px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 
-                            {{ request()->routeIs('foto.index') || request()->routeIs('vidio.index') ? 'text-gray-700' : '' }}">
+                                class="flex items-center px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 ">
+                                {{ __('Kelola Informasi') }}
+                                <svg class="ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                        </x-slot>
+                        <x-slot name="content">
+                            <x-dropdown-link :href="route('informasi.index')"
+                                :active="request()->routeIs('informasi.index')">
+                                {{ __('Informasi') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('data-kesehatan.index')"
+                                :active="request()->routeIs('data-kesehatan.index')">
+                                {{ __('Data Kesehatan') }}
+                            </x-dropdown-link>
+                        </x-slot>
+                    </x-dropdown>
+
+                    <!-- Dropdown: Kelola Ragam -->
+                    <x-dropdown align="center" width="44">
+                        <x-slot name="trigger">
+                            <button
+                                class="flex items-center px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 ">
                                 {{ __('Kelola Ragam') }}
                                 <svg class="ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
@@ -71,13 +83,10 @@
                             </button>
                         </x-slot>
                         <x-slot name="content">
-                            <!-- Link untuk Foto -->
                             <x-dropdown-link :href="route('dashboard.galeri.index')"
                                 :active="request()->routeIs('dashboard.galeri.index')">
                                 {{ __('Foto') }}
                             </x-dropdown-link>
-
-                            <!-- Link untuk Vidio -->
                             <x-dropdown-link :href="route('dashboard.videos.index')"
                                 :active="request()->routeIs('dashboard.videos.index')">
                                 {{ __('Vidio') }}
@@ -85,11 +94,11 @@
                         </x-slot>
                     </x-dropdown>
 
-                    <!-- Static Dropdown: Kelola Unduhan -->
-                    <x-dropdown align="center" width="48">
+                    <!-- Dropdown: Kelola Unduhan -->
+                    <x-dropdown align="center" width="44">
                         <x-slot name="trigger">
-                            <button class="flex items-center px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 
-                            {{ request()->routeIs('/') || request()->routeIs('/') ? 'text-gray-700' : '' }}">
+                            <button
+                                class="flex items-center px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700 ">
                                 {{ __('Kelola Unduhan') }}
                                 <svg class="ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
                                     viewBox="0 0 24 24" stroke="currentColor">
@@ -99,7 +108,6 @@
                             </button>
                         </x-slot>
                         <x-slot name="content">
-                            <!-- Link untuk item -->
                             <x-dropdown-link :href="route('dashboard.prod-kesehatan.index')"
                                 :active="request()->routeIs('dashboard.prod-kesehatan.index')">
                                 {{ __('Produk Kesehatan') }}
@@ -120,7 +128,6 @@
                                 :active="request()->routeIs('dashboard.doc-lainx.index')">
                                 {{ __('Dokumen Lainnya') }}
                             </x-dropdown-link>
-
                         </x-slot>
                     </x-dropdown>
                 </div>
@@ -128,7 +135,7 @@
 
             <!-- Settings Dropdown -->
             <div class="hidden sm:flex sm:items-center sm:ml-6">
-                <x-dropdown align="right" width="48">
+                <x-dropdown align="right" width="44">
                     <x-slot name="trigger">
                         <button
                             class="inline-flex items-center px-3 py-2 border text-sm font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none">

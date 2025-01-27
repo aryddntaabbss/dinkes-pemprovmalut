@@ -15,7 +15,7 @@
                     </a>
                 </div>
 
-                <!-- Table Informasi -->
+                <!-- Table data-kesehatan -->
                 <div class="overflow-x-auto">
                     <table id="search-table" class="min-w-full table-auto border-collapse">
                         <thead>
@@ -37,7 +37,7 @@
                                     </span>
                                 </td>
                                 <td class="px-4 py-3 text-sm text-gray-900">
-                                    {{ config('app.url') }}/informasi/{{ $item->slug }}
+                                    {{ config('app.url') }}/data-kesehatan/{{ $item->slug }}
                                 </td>
                                 <td class="px-4 py-3 text-sm text-gray-900 flex space-x-2">
                                     <!-- Tombol Edit -->
@@ -74,7 +74,7 @@
     <!-- Script untuk konfirmasi penghapusan -->
     <script>
         function confirmDelete(id) {
-            if (confirm('Apakah Anda yakin ingin menghapus halaman informasi ini?')) {
+            if (confirm('Apakah Anda yakin ingin menghapus halaman data-kesehatan ini?')) {
                 document.getElementById('delete-form-' + id).submit();
             }
         }

@@ -74,7 +74,7 @@
     <!-- Script untuk konfirmasi penghapusan -->
     <script>
         function confirmDelete(id) {
-            if (confirm('Apakah Anda yakin ingin menghapus halaman informasi ini?')) {
+            if (confirm('Apakah Anda yakin ingin menghapus?')) {
                 document.getElementById('delete-form-' + id).submit();
             }
         }
