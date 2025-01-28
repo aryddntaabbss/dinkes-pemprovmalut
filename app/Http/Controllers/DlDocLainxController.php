@@ -42,11 +42,15 @@ class DlDocLainxController extends Controller
             'file' => 'required|file|mimes:pdf,doc,docx,txt|max:2048',
         ]);
 
-        $path = $request->file('file')->store('doc-lainx');
+        // Menyimpan file
+        if ($request->hasFile('file')) {
+            // Menyimpan file di folder 'file' pada disk 'public'
+            $filePath = $request->file('file')->store('file', 'public');
+        }
 
         DlDocLainx::create([
             'nama' => $request->nama,
-            'file_path' => $path,
+            'file_path' => $filePath,
         ]);
 
         return redirect()->route('dashboard.doc-lainx.index')->with('success', 'Dokumen berhasil ditambahkan.');

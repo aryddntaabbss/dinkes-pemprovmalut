@@ -97,6 +97,10 @@
 
                 <!-- Tombol Simpan -->
                 <div class="flex justify-end">
+                    <button type="button" onclick="closeModal()"
+                        class="px-4 py-2 bg-gray-500 text-white font-medium rounded-md hover:bg-gray-600 mr-2">
+                        Batal
+                    </button>
                     <button type="submit"
                         class="px-4 py-2 bg-blue-600 text-white font-medium rounded-md hover:bg-blue-700">Simpan</button>
                 </div>

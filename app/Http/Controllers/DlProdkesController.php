@@ -37,20 +37,28 @@ class DlProdkesController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'nama' => 'required|string|max:255',
-            'file' => 'required|file|mimes:pdf,doc,docx,txt|max:2048',
+        // Validasi input
+        $validatedData = $request->validate([
+            'nama' => 'required|string|max:255',  // Validasi nama produk
+            'file' => 'required|file|mimes:pdf,doc,docx,txt|max:2048',  // Validasi format file
         ]);
 
-        $path = $request->file('file')->store('prodkes');
+        // Menyimpan file
+        if ($request->hasFile('file')) {
+            // Menyimpan file di folder 'file' pada disk 'public'
+            $filePath = $request->file('file')->store('file', 'public');
+        }
 
+        // Membuat entri baru di database untuk produk kesehatan
         DlProdkes::create([
-            'nama' => $request->nama,
-            'file_path' => $path,
+            'nama' => $request->nama,  // Menyimpan nama produk
+            'file_path' => $filePath,  // Menyimpan path file
         ]);
 
-        return redirect()->route('dashboard.prod-kesehatan.index')->with('success', 'Produk kesehatan berhasil ditambahkan.');
+        // Redirect ke halaman daftar produk kesehatan setelah berhasil
+        return redirect()->route('dashboard.prod-kesehatan.index')->with('success', 'Produk kesehatan berhasil ditambahkan!');
     }
+
 
     /**
      * Remove the specified resource from storage.

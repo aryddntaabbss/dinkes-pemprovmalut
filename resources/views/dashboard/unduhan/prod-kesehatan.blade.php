@@ -33,12 +33,17 @@
                                 <td class="px-4 py-3 text-sm text-gray-900">{{ $item->nama }}</td>
 
                                 <!-- Kolom File -->
-                                <td class="px-4 py-3 text-sm text-gray-900">
-                                    <a href="{{ Storage::url($item->file_path) }}" target="_blank"
-                                        class="text-blue-600 hover:text-blue-800">
+                                <td class="px-4 py-3 text-sm">
+                                    @if ($item->file_path)
+                                    <a href="{{ Storage::url($item->file_path) }}" class="text-blue-600"
+                                        target="_blank">
                                         Unduh File
                                     </a>
+                                    @else
+                                    <span class="text-red-500">File tidak tersedia</span>
+                                    @endif
                                 </td>
+
 
                                 <!-- Kolom Aksi -->
                                 <td class="px-4 py-3 text-sm text-gray-900">

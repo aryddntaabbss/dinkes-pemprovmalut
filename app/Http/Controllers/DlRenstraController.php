@@ -42,11 +42,15 @@ class DlRenstraController extends Controller
             'file' => 'required|file|mimes:pdf,doc,docx,txt|max:2048',
         ]);
 
-        $path = $request->file('file')->store('renstra');
+        // Menyimpan file
+        if ($request->hasFile('file')) {
+            // Menyimpan file di folder 'file' pada disk 'public'
+            $filePath = $request->file('file')->store('file', 'public');
+        }
 
         DlRenstra::create([
             'nama' => $request->nama,
-            'file_path' => $path,
+            'file_path' => $filePath,
         ]);
 
         return redirect()->route('dashboard.renstra.index')->with('success', 'Renstra berhasil ditambahkan.');

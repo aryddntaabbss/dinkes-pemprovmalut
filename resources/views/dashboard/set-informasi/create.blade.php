@@ -41,7 +41,7 @@
 
                     <!-- Status -->
                     <div class="mb-4">
-                        <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
+                        <label for="name" class="block text-sm font-medium text-gray-700">Status</label>
                         <div class="space-y-2">
                             <div class="flex items-center">
                                 <input type="radio" name="status" id="status_aktif" value="aktif"
