@@ -1,16 +1,8 @@
 <nav class="w-full py-4 border-t border-b bg-gray-50"
     x-data="{ open: false, scrollIndex: 0, itemsPerPage: 5, totalItems: {{ count($kategori) }} }">
-    <!-- Mobile Toggle Button -->
-    <div class="block sm:hidden">
-        <a href="#" class="text-base font-bold uppercase text-center flex justify-between items-center text-teal-700"
-            @click="open = !open">
-            Kategori Kesehatan
-            <i :class="open ? 'fa-chevron-up' : 'fa-chevron-down'" class="fas ml-2"></i>
-        </a>
-    </div>
 
     <!-- Desktop Navigation with Previous and Next buttons -->
-    <div :class="open ? 'block' : 'hidden'" class="w-full sm:flex sm:items-center sm:w-auto sm:px-6">
+    <div class="w-full sm:flex sm:items-center sm:w-auto sm:px-6">
         <div
             class="w-full container mx-auto flex items-center justify-between sm:space-x-4 text-sm font-bold uppercase mt-2 sm:mt-0">
 

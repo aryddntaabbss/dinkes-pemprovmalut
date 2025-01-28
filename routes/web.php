@@ -36,6 +36,9 @@ Route::get('/unduhan/prof-kesehatan', [HomeController::class, 'profKes'])->name(
 Route::get('/unduhan/renstra', [HomeController::class, 'renstra'])->name('pages.unduhan.renstra');
 Route::get('/unduhan/lakip', [HomeController::class, 'lakip'])->name('pages.unduhan.lakip');
 Route::get('/unduhan/doc-lainx', [HomeController::class, 'docLainx'])->name('pages.unduhan.doc-lainx');
+Route::get('/kontak', function () {
+    return view('pages.kontak');
+})->name('kontak');
 
 // =========================
 // Authenticated Routes

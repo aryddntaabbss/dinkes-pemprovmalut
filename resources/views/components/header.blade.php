@@ -133,7 +133,7 @@
                 </div>
             </div>
 
-            <a href="#" class="text-sm font-semibold text-white hover:text-gray-200">Kontak Kami</a>
+            <a href="/kontak" class="text-sm font-semibold text-white hover:text-gray-200">Kontak Kami</a>
         </div>
     </nav>
 
@@ -239,7 +239,7 @@
                             </div>
                         </div>
 
-                        <a href="#"
+                        <a href="/kontak"
                             class="-mx-3 block rounded-lg px-3 py-2 text-base font-semibold text-black hover:bg-teal-500">Kontak
                             Kami</a>
                     </div>
