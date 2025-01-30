@@ -28,8 +28,7 @@
 
                 <!-- Title -->
                 <h2 class="text-2xl font-bold leading-tight">
-                    <a href="{{ route('berita.show', $item->id) }}"
-                        class="text-gray-900 hover:text-gray-700 transition-colors">
+                    <a class="text-gray-900 hover:text-gray-700 transition-colors">
                         {{ $item->judul }}
                     </a>
                 </h2>
@@ -49,7 +48,7 @@
 
                 <!-- Read More Link -->
                 <div class="pt-2">
-                    <a href="{{ route('berita.show', $item->id) }}"
+                    <a href="{{ route('pages.show', $item->id) }}"
                         class="inline-flex items-center space-x-2 text-gray-800 font-extralight hover:text-teal-500 transition-colors">
                         <span>SELENGKAPNYA</span>
                         <i class="fas fa-arrow-right text-sm"></i>

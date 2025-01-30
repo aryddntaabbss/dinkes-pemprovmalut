@@ -24,6 +24,7 @@ use Illuminate\Support\Facades\Route;
 // Public Routes
 // =========================
 Route::get('/', [HomeController::class, 'index'])->name('pages.index');
+Route::get('/test/{id}', [HomeController::class, 'blog'])->name('pages.show');
 
 Route::get('/profil/{slug}', fn($slug) => view('pages.blank', ['page' => Profil::where('slug', $slug)->firstOrFail()]));
 Route::get('/informasi/{slug}', fn($slug) => view('pages.blank', ['page' => Informasi::where('slug', $slug)->firstOrFail()]));
@@ -56,7 +57,6 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{berita}/edit', [BeritaController::class, 'edit'])->name('edit');
         Route::put('/{berita}', [BeritaController::class, 'update'])->name('update');
         Route::delete('/{berita}', [BeritaController::class, 'destroy'])->name('destroy');
-        Route::get('/{berita}', [BeritaController::class, 'show'])->name('show');
         Route::put('/{berita}/up', [BeritaController::class, 'updateUp'])->name('update.up');
     });
 

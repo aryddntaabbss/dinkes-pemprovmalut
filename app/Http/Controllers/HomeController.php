@@ -37,15 +37,31 @@ class HomeController extends Controller
         ]);
     }
 
-    public function blog()
+    // public function show($id)
+    // {
+    //     $berita = Berita::findOrFail($id);
+    //     $beritaTerpopuler = Berita::where('up_berita', true)
+    //         ->latest()
+    //         ->take(5)
+    //         ->get();
+
+    //     return view('pages.show', [
+    //         'berita' => $berita,
+    //         'beritaTerpopuler' => $beritaTerpopuler,
+    //     ]);
+    // }
+
+    public function blog($id)
     {
         // Ambil 5 berita terpopuler untuk blog
+        $berita = Berita::findOrFail($id);
         $beritaTerpopuler = Berita::where('up_berita', true)
             ->latest()
             ->take(5)
             ->get();
 
         return view('pages.show', [
+            'berita' => $berita,
             'beritaTerpopuler' => $beritaTerpopuler,
         ]);
     }
