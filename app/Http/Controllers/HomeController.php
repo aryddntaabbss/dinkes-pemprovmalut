@@ -12,6 +12,7 @@ use App\Models\DlProfkes;
 use App\Models\DlRenstra;
 use App\Models\DlLakip;
 use App\Models\DlDocLainx;
+use App\Models\ProfilPejabat;
 
 class HomeController extends Controller
 {
@@ -36,20 +37,6 @@ class HomeController extends Controller
             'kategori' => $kategori
         ]);
     }
-
-    // public function show($id)
-    // {
-    //     $berita = Berita::findOrFail($id);
-    //     $beritaTerpopuler = Berita::where('up_berita', true)
-    //         ->latest()
-    //         ->take(5)
-    //         ->get();
-
-    //     return view('pages.show', [
-    //         'berita' => $berita,
-    //         'beritaTerpopuler' => $beritaTerpopuler,
-    //     ]);
-    // }
 
     public function blog($id)
     {
@@ -117,5 +104,17 @@ class HomeController extends Controller
     {
         $docLainx = DlDocLainx::all();
         return view('pages.unduhan.doc-lainx', compact('docLainx'));
+    }
+
+    public function pejabat(Request $request)
+    {
+        $selectedJabatan = $request->get('jabatan', 'all');
+        $pejabat = ProfilPejabat::all();
+
+        $pejabatTerpilih = ($selectedJabatan === 'all')
+            ? $pejabat->first()
+            : ProfilPejabat::where('jabatan', $selectedJabatan)->first();
+
+        return view('pages.pejabat', compact('pejabat', 'pejabatTerpilih', 'selectedJabatan'));
     }
 }

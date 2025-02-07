@@ -69,22 +69,49 @@
         </div>
     </div>
 
-    <!-- Tambahkan CKEditor Script -->
+    <!-- CKEditor Script -->
     <script src="https://cdn.ckeditor.com/ckeditor5/36.0.1/classic/ckeditor.js"></script>
     <script>
-        ClassicEditor
-            .create(document.querySelector('#content'))
-            .catch(error => {
-                console.error(error);
-            });
-
-        function generateSlug() {
-            const name = document.getElementById('name').value;
-            const slug = name.toLowerCase()
-                .replace(/[^a-z0-9 -]/g, '') // Menghapus karakter non-alfanumerik
-                .replace(/\s+/g, '-') // Mengganti spasi dengan "-"
-                .replace(/-+/g, '-'); // Mengganti "--" menjadi "-"
-            document.getElementById('slug').value = slug;
+        class MyUploadAdapter {
+            constructor(loader) {
+                this.loader = loader;
+            }
+    
+            upload() {
+                return this.loader.file
+                    .then(file => new Promise((resolve, reject) => {
+                        const data = new FormData();
+                        data.append('upload', file);
+    
+                        fetch('{{ route("ckeditor.upload") }}', {
+                            method: 'POST',
+                            body: data,
+                            headers: {
+                                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                            }
+                        })
+                        .then(response => response.json())
+                        .then(result => {
+                            if (!result || !result.url) {
+                                return reject(result);
+                            }
+                            resolve({ default: result.url });
+                        })
+                        .catch(error => reject(error));
+                    }));
+            }
         }
+    
+        function CustomUploadAdapterPlugin(editor) {
+            editor.plugins.get('FileRepository').createUploadAdapter = (loader) => {
+                return new MyUploadAdapter(loader);
+            };
+        }
+    
+        ClassicEditor
+            .create(document.querySelector('#content'), {
+                extraPlugins: [CustomUploadAdapterPlugin]
+            })
+            .catch(error => console.error(error));
     </script>
 </x-app-layout>

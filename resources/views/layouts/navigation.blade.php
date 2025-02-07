@@ -1,6 +1,6 @@
 <nav x-data="{ open: false }" class="bg-white border-b border-gray-100">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between h-16">
             <!-- Logo and Navigation Links -->
             <div class="flex items-center">
@@ -15,10 +15,34 @@
                     <x-nav-link :href="route('index')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
-
+                    {{--
                     <x-nav-link :href="route('profil.index')">
                         {{ __('Profil') }}
-                    </x-nav-link>
+                    </x-nav-link> --}}
+
+                    <!-- Dropdown: Kelola Profil -->
+                    <x-dropdown align="center" width="44">
+                        <x-slot name="trigger">
+                            <button
+                                class="flex items-center px-4 py-2 text-sm font-medium text-gray-500 hover:text-gray-700">
+                                {{ __('Kelola Profil') }}
+                                <svg class="ml-2 w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none"
+                                    viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M19 9l-7 7-7-7" />
+                                </svg>
+                            </button>
+                        </x-slot>
+                        <x-slot name="content">
+                            <x-dropdown-link :href="route('profil.index')" :active="request()->routeIs('profil.index')">
+                                {{ __('Menu Profil') }}
+                            </x-dropdown-link>
+                            <x-dropdown-link :href="route('profil-pejabat.index')"
+                                :active="request()->routeIs('profil-pejabat.index')">
+                                {{ __('Profil Pejabat') }}
+                            </x-dropdown-link>
+                        </x-slot>
+                    </x-dropdown>
 
                     <!-- Dropdown: Kelola Artikel -->
                     <x-dropdown align="center" width="44">

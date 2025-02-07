@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\{
     BeritaController,
     DashboardController,
@@ -14,6 +15,7 @@ use App\Http\Controllers\{
     InformasiController,
     KategoriController,
     ProfileController,
+    ProfilPejabatController,
     ProfilController,
     VideoController
 };
@@ -24,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 // Public Routes
 // =========================
 Route::get('/', [HomeController::class, 'index'])->name('pages.index');
-Route::get('/test/{id}', [HomeController::class, 'blog'])->name('pages.show');
+Route::get('/artikel/{id}', [HomeController::class, 'blog'])->name('pages.show');
 
 Route::get('/profil/{slug}', fn($slug) => view('pages.blank', ['page' => Profil::where('slug', $slug)->firstOrFail()]));
 Route::get('/informasi/{slug}', fn($slug) => view('pages.blank', ['page' => Informasi::where('slug', $slug)->firstOrFail()]));
@@ -37,9 +39,18 @@ Route::get('/unduhan/prof-kesehatan', [HomeController::class, 'profKes'])->name(
 Route::get('/unduhan/renstra', [HomeController::class, 'renstra'])->name('pages.unduhan.renstra');
 Route::get('/unduhan/lakip', [HomeController::class, 'lakip'])->name('pages.unduhan.lakip');
 Route::get('/unduhan/doc-lainx', [HomeController::class, 'docLainx'])->name('pages.unduhan.doc-lainx');
+Route::get('/profil-pejabat', [HomeController::class, 'pejabat'])->name('pages.pejabat');
 Route::get('/kontak', function () {
     return view('pages.kontak');
 })->name('kontak');
+
+Route::post('/ckeditor/upload', function (Request $request) {
+    $request->validate(['upload' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048']);
+
+    $path = $request->file('upload')->store('uploads', 'public');
+
+    return response()->json(['url' => asset("storage/{$path}")]);
+})->name('ckeditor.upload');
 
 // =========================
 // Authenticated Routes
@@ -56,6 +67,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::post('/', [BeritaController::class, 'store'])->name('store');
         Route::get('/{berita}/edit', [BeritaController::class, 'edit'])->name('edit');
         Route::put('/{berita}', [BeritaController::class, 'update'])->name('update');
+        Route::get('/{berita}', [BeritaController::class, 'show'])->name('show');
         Route::delete('/{berita}', [BeritaController::class, 'destroy'])->name('destroy');
         Route::put('/{berita}/up', [BeritaController::class, 'updateUp'])->name('update.up');
     });
@@ -80,6 +92,16 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('profil/{profil}/edit', [ProfilController::class, 'edit'])->name('profil.edit');
         Route::put('profil/{profil}', [ProfilController::class, 'update'])->name('profil.update');
         Route::delete('profil/{profil}', [ProfilController::class, 'destroy'])->name('profil.destroy');
+    });
+
+    // Profil Pejabat Management
+    Route::prefix('kelola-profil-pejabat')->group(function () {
+        Route::get('/', [ProfilPejabatController::class, 'index'])->name('profil-pejabat.index');
+        Route::get('/create', [ProfilPejabatController::class, 'create'])->name('profil-pejabat.create');
+        Route::post('/', [ProfilPejabatController::class, 'store'])->name('profil-pejabat.store');
+        Route::get('/{pejabat}/edit', [ProfilPejabatController::class, 'edit'])->name('profil-pejabat.edit');
+        Route::put('/{pejabat}', [ProfilPejabatController::class, 'update'])->name('profil-pejabat.update');
+        Route::delete('/{pejabat}', [ProfilPejabatController::class, 'destroy'])->name('profil-pejabat.destroy');
     });
 
     // Informasi Management

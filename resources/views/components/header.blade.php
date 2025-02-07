@@ -39,6 +39,9 @@
                     <a href="{{ url('/profil/'.$menu->slug) }}"
                         class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">{{ $menu->name }}</a>
                     @endforeach
+                    <a href="/profil-pejabat"
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Profil
+                        Pejabat</a>
                     @else
                     <p>No menu available</p>
                     @endif
