@@ -8,6 +8,11 @@
         <div class="flex flex-col md:flex-row justify-center space-x-0 md:space-x-6 space-y-6 md:space-y-0">
             <!-- Card Paket -->
             <div class="w-full bg-white border rounded-lg py-8 px-10 text-justify shadow-xl" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-gray-800 text-start pb-5" data-aos="fade-up"
+                    data-aos-duration="1500">
+                    Profil Pejabat
+                </h2>
+
                 <!-- Jabatan -->
                 <div class="mb-6">
                     <ul class="flex flex-wrap gap-3">

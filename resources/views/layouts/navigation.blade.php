@@ -41,6 +41,10 @@
                                 :active="request()->routeIs('profil-pejabat.index')">
                                 {{ __('Profil Pejabat') }}
                             </x-dropdown-link>
+                            <x-dropdown-link :href="route('struktur.index')"
+                                :active="request()->routeIs('struktur.index')">
+                                {{ __('Struktur Organisasi') }}
+                            </x-dropdown-link>
                         </x-slot>
                     </x-dropdown>
 

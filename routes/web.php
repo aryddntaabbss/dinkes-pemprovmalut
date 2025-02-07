@@ -17,7 +17,8 @@ use App\Http\Controllers\{
     ProfileController,
     ProfilPejabatController,
     ProfilController,
-    VideoController
+    VideoController,
+    StrukturOrganisasiController
 };
 use App\Models\{DtaKesehatan, Informasi, Profil};
 use Illuminate\Support\Facades\Route;
@@ -40,17 +41,10 @@ Route::get('/unduhan/renstra', [HomeController::class, 'renstra'])->name('pages.
 Route::get('/unduhan/lakip', [HomeController::class, 'lakip'])->name('pages.unduhan.lakip');
 Route::get('/unduhan/doc-lainx', [HomeController::class, 'docLainx'])->name('pages.unduhan.doc-lainx');
 Route::get('/profil-pejabat', [HomeController::class, 'pejabat'])->name('pages.pejabat');
+Route::get('/struktur-organisasi', [HomeController::class, 'struktur'])->name('pages.struktur-org');
 Route::get('/kontak', function () {
     return view('pages.kontak');
 })->name('kontak');
-
-Route::post('/ckeditor/upload', function (Request $request) {
-    $request->validate(['upload' => 'required|image|mimes:jpg,jpeg,png,gif|max:2048']);
-
-    $path = $request->file('upload')->store('uploads', 'public');
-
-    return response()->json(['url' => asset("storage/{$path}")]);
-})->name('ckeditor.upload');
 
 // =========================
 // Authenticated Routes
@@ -71,6 +65,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::delete('/{berita}', [BeritaController::class, 'destroy'])->name('destroy');
         Route::put('/{berita}/up', [BeritaController::class, 'updateUp'])->name('update.up');
     });
+
+    // Struktur Organisasi Management
+    Route::prefix('struktur-org')->name('struktur.')->group(function () {
+        Route::get('/', [StrukturOrganisasiController::class, 'index'])->name('index');
+        Route::post('/', [StrukturOrganisasiController::class, 'store'])->name('store');
+        Route::delete('/{id}', [StrukturOrganisasiController::class, 'destroy'])->name('destroy');
+    });
+
+
 
     // Kategori Management
     Route::prefix('kategori')->name('kategori.')->group(function () {

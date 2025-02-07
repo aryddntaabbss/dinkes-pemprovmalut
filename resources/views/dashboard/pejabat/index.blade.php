@@ -43,7 +43,7 @@
                                 <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                                     <div class="flex space-x-2">
                                         <a href="{{ route('profil-pejabat.edit', $item->id) }}"
-                                            class="text-indigo-600 hover:text-indigo-900">
+                                            class="inline-flex items-center px-3 py-1 text-sm font-medium text-yellow-600 bg-yellow-100 rounded-md hover:bg-yellow-200">
                                             Edit
                                         </a>
                                         <form id="delete-form-{{ $item->id }}"
@@ -51,7 +51,7 @@
                                             @csrf
                                             @method('DELETE')
                                             <button type="button" onclick="confirmDelete({{ $item->id }})"
-                                                class="text-red-600 hover:text-red-900">
+                                                class="inline-flex items-center px-3 py-1 text-sm font-medium text-red-600 bg-red-100 rounded-md hover:bg-red-200">
                                                 Hapus
                                             </button>
                                         </form>

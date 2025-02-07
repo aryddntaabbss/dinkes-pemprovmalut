@@ -13,6 +13,7 @@ use App\Models\DlRenstra;
 use App\Models\DlLakip;
 use App\Models\DlDocLainx;
 use App\Models\ProfilPejabat;
+use App\Models\StrukturOrganisasi;
 
 class HomeController extends Controller
 {
@@ -116,5 +117,14 @@ class HomeController extends Controller
             : ProfilPejabat::where('jabatan', $selectedJabatan)->first();
 
         return view('pages.pejabat', compact('pejabat', 'pejabatTerpilih', 'selectedJabatan'));
+    }
+
+    public function struktur()
+    {
+        // Ambil semua data struktur organisasi
+        $struktur = StrukturOrganisasi::first(); // Jika hanya satu data, gunakan first()
+
+        // Kirim data ke view
+        return view('pages.struktur-org', compact('struktur'));
     }
 }
