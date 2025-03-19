@@ -12,10 +12,10 @@ class Video extends Model
     protected $table = 'videos';
 
     // Tentukan kolom yang bisa diisi
-    protected $fillable = ['title', 'video_path'];
+    protected $fillable = ['title', 'ket_video', 'video_path'];
 
     public function setVideoPathAttribute($value)
     {
-        $this->attributes['video_path'] = 'videos/' . $value;
+        $this->attributes['video_path'] = '' . $value;
     }
 }

@@ -16,6 +16,7 @@ class Berita extends Model
         'judul',
         'konten',
         'gambar',
+        'ket_gambar',
         'kategori_id',
         'penulis',
         'up_berita'

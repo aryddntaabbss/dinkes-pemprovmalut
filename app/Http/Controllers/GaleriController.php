@@ -19,6 +19,7 @@ class GaleriController extends Controller
     {
         $request->validate([
             'image' => 'required|image|mimes:jpeg,png,jpg,gif|max:10048',
+            'ket_gambar' => 'required|string|max:255',
             'category' => 'required|string|max:255',
         ]);
 
@@ -29,6 +30,7 @@ class GaleriController extends Controller
             // Simpan data ke database
             Galeri::create([
                 'image_path' => $imagePath,
+                'ket_gambar' => $request->ket_gambar,
                 'category' => $request->category,
             ]);
 

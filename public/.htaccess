@@ -3,6 +3,13 @@
         Options -MultiViews -Indexes
     </IfModule>
 
+    # Menangani MIME type untuk video
+    <IfModule mod_mime.c>
+        AddType video/mp4 .mp4
+        AddType video/webm .webm
+        AddType video/ogg .ogv
+    </IfModule>
+
     RewriteEngine On
 
     # Handle Authorization Header

@@ -9,11 +9,23 @@ class Informasi extends Model
 {
     use HasFactory;
 
+    // Tentukan nama tabel jika berbeda
     protected $table = 'informasi';
+
     protected $fillable = [
-        'name',
-        'slug',
-        'content',
-        'status'
+        'judul',
+        'konten',
+        'gambar',
+        'ket_gambar',
+        'kategori_id',
+        'up_informasi'
     ];
+
+    /**
+     * Relasi ke kategori (belongsTo)
+     */
+    public function kategori()
+    {
+        return $this->belongsTo(Kategori::class);
+    }
 }

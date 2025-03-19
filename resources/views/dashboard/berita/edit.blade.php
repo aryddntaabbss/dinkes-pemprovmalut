@@ -76,6 +76,19 @@
                         @enderror
                     </div>
 
+                    <!-- Input Keterangan Gambar -->
+                    <div class="mb-4">
+                        <label for="ket_gambar" class="block text-sm font-medium text-gray-700">Keterangan
+                            Gambar:</label>
+                        <input type="text" id="ket_gambar" name="ket_gambar"
+                            value="{{ old('ket_gambar', $berita->ket_gambar) }}"
+                            class="mt-1 p-2 w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            required>
+                        @error('ket_gambar')
+                        <div class="text-red-500 text-sm mt-1">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <!-- Checkbox Up Berita -->
                     <div class="mb-4">
                         <label for="up_berita" class="inline-flex items-center">

@@ -12,6 +12,7 @@ use App\Models\DlProfkes;
 use App\Models\DlRenstra;
 use App\Models\DlLakip;
 use App\Models\DlDocLainx;
+use App\Models\Informasi;
 use App\Models\ProfilPejabat;
 use App\Models\StrukturOrganisasi;
 
@@ -21,11 +22,18 @@ class HomeController extends Controller
     {
         // Ambil data berita dengan pagination
         $berita = Berita::paginate(4);
+        $informasi = Informasi::paginate(4);
 
         // Ambil 5 berita terpopuler
         $beritaTerpopuler = Berita::where('up_berita', true)
             ->latest() // Menampilkan berita terbaru terlebih dahulu
             ->take(5) // Ambil 5 berita terpopuler
+            ->get();
+
+        // Ambil 5 informasi terpopuler
+        $informasiTerpopuler = Informasi::where('up_informasi', true)
+            ->latest() // Menampilkan informasi terbaru terlebih dahulu
+            ->take(5) // Ambil 5 informasi terpopuler
             ->get();
 
         // Ambil kategori untuk sidebar jika diperlukan
@@ -34,9 +42,17 @@ class HomeController extends Controller
         // Kirim data ke view
         return view('pages.index', [
             'berita' => $berita,
+            'informasi' => $informasi,
             'beritaTerpopuler' => $beritaTerpopuler,
+            'informasiTerpopuler' => $informasiTerpopuler,
             'kategori' => $kategori
         ]);
+    }
+
+    public function allinfo()
+    {
+        $informasi = Informasi::latest()->paginate(6); // Ambil informasi terbaru dengan pagination
+        return view('pages.all-info', compact('informasi'));
     }
 
     public function blog($id)
@@ -53,6 +69,21 @@ class HomeController extends Controller
             'beritaTerpopuler' => $beritaTerpopuler,
         ]);
     }
+
+    public function info($id)
+    {
+        // Ambil informasi berdasarkan ID, jika tidak ditemukan akan error 404
+        $informasi = Informasi::where('id', $id)->firstOrFail();
+
+        // Ambil 5 informasi terpopuler yang memiliki flag "up_informasi" = true
+        $informasiTerpopuler = Informasi::where('up_informasi', true)
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('pages.info', compact('informasi', 'informasiTerpopuler'));
+    }
+
 
     public function galeri(Request $request)
     {

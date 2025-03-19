@@ -9,7 +9,7 @@
     <section class="w-full md:w-2/3 flex flex-col items-center px-3">
         @foreach($berita as $item)
         <article
-            class="w-full flex flex-col bg-white rounded-lg shadow-lg overflow-hidden mb-5 transition-transform duration-300 hover:shadow-xl">
+            class="w-full flex flex-col bg-white rounded-lg shadow-lg overflow-hidden mb-6 transition-transform duration-300 hover:shadow-xl">
             <!-- Featured Image -->
             <div class="relative h-48 overflow-hidden">
                 <img src="{{ asset('storage/' . $item->gambar) }}" alt="Article featured image"
@@ -64,9 +64,41 @@
         </div>
     </section>
 
-    <!-- Sidebar Section (Sticky) -->
-    <aside class="w-full md:w-1/3 flex flex-col items-center px-3 sticky top-0">
+    <!-- Sidebar Section -->
+    <aside class="w-full md:w-1/3 flex flex-col items-center px-3 space-y-6 md:sticky bottom-0 md:mb-0 mb-5">
+        <!-- Sidebar Populer Section -->
         @include('components.populer')
+
+        <!-- Sidebar Informasi Section -->
+        <div class="w-full bg-white shadow-lg rounded-lg flex flex-col p-6">
+            <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-1 w-full">
+                <p class="text-xl font-extrabold border-b-2">Informasi Populer</p>
+                @if($informasiTerpopuler->isEmpty())
+                <p class="text-center py-3 border my-2 text-gray-500">Tidak ada berita terpopuler saat ini.</p>
+                @else
+                @foreach($informasiTerpopuler as $info)
+                <div class="flex items-center space-x-2 border-b ">
+                    <!-- Gambar di Kiri -->
+                    <img class="w-14 h-20 object-cover rounded-md" src="{{ asset('storage/' . $info->gambar) }}"
+                        alt="{{ $info->ket_gambar }}">
+
+                    <!-- Konten di Kanan -->
+                    <div class="p-4 w-full md:w-2/3 flex flex-col justify-between">
+                        <h2 class="text-lg font-semibold text-gray-800 leading-tight">
+                            <a href="{{ route('pages.info', $info->id) }}" class="hover:text-teal-500">
+                                {{ Str::limit($info->judul, 40) }}
+                            </a>
+                        </h2>
+                        <p class="text-sm text-gray-700 mt-2">
+                            {{ Str::limit(strip_tags($info->konten), 60, '...') }}
+                        </p>
+                        <p class="text-xs text-gray-500 mt-1">{{ $info->created_at->format('d M Y') }}</p>
+                    </div>
+                </div>
+                @endforeach
+                @endif
+            </div>
+        </div>
     </aside>
 </section>
 

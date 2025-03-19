@@ -1,6 +1,6 @@
 <!-- Berita Terpopuler -->
 <div class="w-full bg-white shadow-lg rounded-lg flex flex-col p-6">
-    <p class="text-xl font-bold">Berita Terpopuler</p>
+    <p class="text-xl font-extrabold border-b-2">Berita Terpopuler</p>
 
     <div class="space-y-4">
         @if($beritaTerpopuler->isEmpty())

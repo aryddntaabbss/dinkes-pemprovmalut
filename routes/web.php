@@ -28,9 +28,10 @@ use Illuminate\Support\Facades\Route;
 // =========================
 Route::get('/', [HomeController::class, 'index'])->name('pages.index');
 Route::get('/artikel/{id}', [HomeController::class, 'blog'])->name('pages.show');
+Route::get('/all-informasi', [HomeController::class, 'allinfo'])->name('pages.allinfo');
+Route::get('/info/{id}', [HomeController::class, 'info'])->name('pages.info');
 
 Route::get('/profil/{slug}', fn($slug) => view('pages.blank', ['page' => Profil::where('slug', $slug)->firstOrFail()]));
-Route::get('/informasi/{slug}', fn($slug) => view('pages.blank', ['page' => Informasi::where('slug', $slug)->firstOrFail()]));
 Route::get('/data-kesehatan/{slug}', fn($slug) => view('pages.blank', ['page' => DtaKesehatan::where('slug', $slug)->firstOrFail()]));
 
 Route::get('/ragam/foto', [HomeController::class, 'galeri'])->name('pages.ragam.foto');
@@ -64,6 +65,18 @@ Route::middleware(['auth', 'verified'])->group(function () {
         Route::get('/{berita}', [BeritaController::class, 'show'])->name('show');
         Route::delete('/{berita}', [BeritaController::class, 'destroy'])->name('destroy');
         Route::put('/{berita}/up', [BeritaController::class, 'updateUp'])->name('update.up');
+    });
+
+    // Informasi Management
+    Route::prefix('informasi')->name('informasi.')->group(function () {
+        Route::get('/', [InformasiController::class, 'index'])->name('index');
+        Route::get('/create', [InformasiController::class, 'create'])->name('create');
+        Route::post('/', [InformasiController::class, 'store'])->name('store');
+        Route::get('/{informasi}/edit', [InformasiController::class, 'edit'])->name('edit');
+        Route::put('/{informasi}', [InformasiController::class, 'update'])->name('update');
+        Route::get('/{informasi}', [InformasiController::class, 'show'])->name('show');
+        Route::delete('/{informasi}', [InformasiController::class, 'destroy'])->name('destroy');
+        Route::put('/{informasi}/up', [InformasiController::class, 'updateUp'])->name('update.up');
     });
 
     // Struktur Organisasi Management
@@ -108,15 +121,15 @@ Route::middleware(['auth', 'verified'])->group(function () {
     });
 
     // Informasi Management
-    Route::prefix('kelola-informasi')->group(function () {
-        Route::get('informasi', [InformasiController::class, 'index'])->name('informasi.index');
-        Route::get('informasi/{informasi}', [InformasiController::class, 'show'])->name('informasi.show');
-        Route::get('/create', [InformasiController::class, 'create'])->name('informasi.create');
-        Route::post('informasi', [InformasiController::class, 'store'])->name('informasi.store');
-        Route::get('informasi/{informasi}/edit', [InformasiController::class, 'edit'])->name('informasi.edit');
-        Route::put('informasi/{informasi}', [InformasiController::class, 'update'])->name('informasi.update');
-        Route::delete('informasi/{informasi}', [InformasiController::class, 'destroy'])->name('informasi.destroy');
-    });
+    // Route::prefix('kelola-informasi')->group(function () {
+    //     Route::get('informasi', [InformasiController::class, 'index'])->name('informasi.index');
+    //     Route::get('informasi/{informasi}', [InformasiController::class, 'show'])->name('informasi.show');
+    //     Route::get('/create', [InformasiController::class, 'create'])->name('informasi.create');
+    //     Route::post('informasi', [InformasiController::class, 'store'])->name('informasi.store');
+    //     Route::get('informasi/{informasi}/edit', [InformasiController::class, 'edit'])->name('informasi.edit');
+    //     Route::put('informasi/{informasi}', [InformasiController::class, 'update'])->name('informasi.update');
+    //     Route::delete('informasi/{informasi}', [InformasiController::class, 'destroy'])->name('informasi.destroy');
+    // });
 
     // Data Kesehatan Management
     Route::prefix('kelola-dakes')->group(function () {

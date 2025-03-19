@@ -12,6 +12,7 @@ class Galeri extends Model
     protected $table = 'galeri';
     protected $fillable = [
         'image_path',
+        'ket_gambar',
         'category',
     ];
 }

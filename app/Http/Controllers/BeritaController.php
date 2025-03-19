@@ -31,6 +31,7 @@ class BeritaController extends Controller
             'judul' => 'required|max:255',
             'konten' => 'required',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:30048',
+            'ket_gambar' => 'required|max:255',
             'kategori_id' => 'required|exists:kategori,id',
             'penulis' => 'nullable|string|max:255',
             'up_berita' => 'nullable|boolean',
@@ -47,6 +48,7 @@ class BeritaController extends Controller
             'judul' => $request->judul,
             'konten' => $request->konten,
             'gambar' => $gambarPath,
+            'ket_gambar' => $request->ket_gambar,
             'kategori_id' => $request->kategori_id,
             'penulis' => $request->penulis,
             'up_berita' => $request->up_berita ?? false, // Default to false if not provided
@@ -68,6 +70,7 @@ class BeritaController extends Controller
             'judul' => 'required|max:255',
             'konten' => 'required',
             'gambar' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:30048',
+            'ket_gambar' => 'required|max:255',
             'kategori_id' => 'required|exists:kategori,id',
             'penulis' => 'nullable|string|max:255',
             'up_berita' => 'nullable|boolean',
@@ -90,6 +93,7 @@ class BeritaController extends Controller
             'judul' => $request->judul,
             'konten' => $request->konten,
             'kategori_id' => $request->kategori_id,
+            'ket_gambar' => $request->ket_gambar,
             'penulis' => $request->penulis,
             'up_berita' => $request->up_berita ?? false, // Default to false if not provided
         ]);

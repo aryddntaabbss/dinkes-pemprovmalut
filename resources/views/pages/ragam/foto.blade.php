@@ -44,9 +44,12 @@
 
                         <!-- Kategori -->
                         <div
-                            class="absolute bottom-2 left-2 bg-gray-800 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            class="absolute bottom-8 left-1 bg-gray-800 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             {{ ucfirst($image->category) }}
                         </div>
+                        <p class="text-sm py-1 font-medium text-blue-500"><span
+                                class="mr-2">•</span>{{ $image->ket_gambar }}
+                        </p>
                     </div>
                     @empty
                     <p class="text-center col-span-full text-gray-500">Tidak ada gambar untuk kategori ini.</p>

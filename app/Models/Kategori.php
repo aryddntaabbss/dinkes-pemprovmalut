@@ -21,4 +21,9 @@ class Kategori extends Model
     {
         return $this->hasMany(Berita::class);
     }
+
+    public function informasi()
+    {
+        return $this->hasMany(Informasi::class);
+    }
 }

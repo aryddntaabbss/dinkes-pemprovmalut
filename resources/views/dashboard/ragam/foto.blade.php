@@ -22,6 +22,7 @@
                         <thead>
                             <tr class="bg-gray-100">
                                 <th class="px-4 py-2 text-left text-sm font-medium text-gray-900">Foto</th>
+                                <th class="px-4 py-2 text-left text-sm font-medium text-gray-900">Keterangan Gambar</th>
                                 <th class="px-4 py-2 text-left text-sm font-medium text-gray-900">Kategori</th>
                                 <th class="px-4 py-2 text-left text-sm font-medium text-gray-900">Aksi</th>
                             </tr>
@@ -34,6 +35,9 @@
                                     <img src="{{ Storage::url($item->image_path) }}" alt="Foto"
                                         class="w-10 h-10 object-cover rounded-md">
                                 </td>
+
+                                <!-- Kolom Keterangan Gambar -->
+                                <td class="px-4 py-3 text-sm text-gray-900">{{ $item->ket_gambar }}</td>
 
                                 <!-- Kolom Kategori -->
                                 <td class="px-4 py-3 text-sm text-gray-900">{{ $item->category }}</td>
@@ -82,6 +86,17 @@
                     <input type="file" name="image" id="image" accept="image/*"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                         required>
+                    <p class="mt-1 text-xs text-gray-500">* Maksimal ukuran gambar 5MB. Format yang didukung: JPG, JPEG,
+                        PNG, GIF, SVG.
+                    </p>
+                </div>
+
+                <!-- Input Keterangan Gambar -->
+                <div class="mb-4">
+                    <label for="ket_gambar" class="block text-sm font-medium text-gray-700">Keterangan Gambar</label>
+                    <input type="text" name="ket_gambar" id="ket_gambar"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        placeholder="Masukkan Keterangan Gambar" required>
                 </div>
 
                 <!-- Input Kategori -->
@@ -89,7 +104,7 @@
                     <label for="category" class="block text-sm font-medium text-gray-700">Kategori</label>
                     <input type="text" name="category" id="category"
                         class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
-                        placeholder="Masukkan kategori foto" required>
+                        placeholder="Masukkan kategori Gambar" required>
                 </div>
 
                 <!-- Tombol Simpan -->
@@ -118,7 +133,7 @@
         }
 
         function confirmDelete(id) {
-            if (confirm('Apakah Anda yakin ingin menghapus foto ini?')) {
+            if (confirm('Apakah Anda yakin ingin menghapus Gambar ini?')) {
                 document.getElementById('delete-form-' + id).submit();
             }
         }

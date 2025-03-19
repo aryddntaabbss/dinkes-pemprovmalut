@@ -19,18 +19,20 @@ class VideoController extends Controller
     {
         // Validasi input
         $request->validate([
-            'video' => 'required|mimes:mp4,avi,mov,wmv|max:100000', // Validasi file video
+            'video' => 'required|mimes:mp4,avi,mov,wmv,webm,ogg|max:102400', // Validasi file video
+            'ket_video' => 'required|string|max:255',
             'title' => 'required|string|max:255',
         ]);
 
-        // Menyimpan video
+        // Menyimpan video ke storage/public/videos
         $videoPath = $request->file('video')->store('videos', 'public');
 
-        // Membuat entri video baru di database
         Video::create([
             'title' => $request->title,
-            'video_path' => $videoPath,
+            'ket_video' => $request->ket_video,
+            'video_path' => $videoPath, // Simpan path yang diberikan langsung oleh Laravel
         ]);
+
 
         return redirect()->route('dashboard.videos.index')->with('success', 'Video berhasil diupload!');
     }

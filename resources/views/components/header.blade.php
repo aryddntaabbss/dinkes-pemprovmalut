@@ -61,11 +61,10 @@
                     </svg>
                 </button>
                 <div class="dropdown-menu absolute left-0 mt-2 w-56 p-3 bg-white shadow-lg rounded-md hidden z-50">
+                    <a href="/all-informasi"
+                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">Informasi</a>
+
                     @if(isset($informasilMenus) && $informasilMenus->count() > 0)
-                    @foreach($informasilMenus as $menu)
-                    <a href="{{ url('/informasi/'.$menu->slug) }}"
-                        class="block px-4 py-2 text-sm rounded-md text-black hover:text-white hover:bg-teal-500">{{ $menu->name }}</a>
-                    @endforeach
 
                     <!-- Data Kesehatan Dropdown -->
                     <div class="relative dropdown">

@@ -22,6 +22,7 @@
                         <thead>
                             <tr class="bg-gray-100">
                                 <th class="px-4 py-2 text-left text-sm font-medium text-gray-900">Video</th>
+                                <th class="px-4 py-2 text-left text-sm font-medium text-gray-900">Keterangan Video</th>
                                 <th class="px-4 py-2 text-left text-sm font-medium text-gray-900">Judul Video</th>
                                 <th class="px-4 py-2 text-left text-sm font-medium text-gray-900">Aksi</th>
                             </tr>
@@ -34,9 +35,11 @@
                                 <td class="px-4 py-3 text-sm text-gray-900">
                                     <video class="w-full h-32 rounded-md" controls>
                                         <source src="{{ asset('storage/' . $video->video_path) }}" type="video/mp4">
-                                        Your browser does not support the video tag.
                                     </video>
                                 </td>
+
+                                <!-- Kolom Keterangan Video -->
+                                <td class="px-4 py-3 text-sm text-gray-900">{{ $video->ket_video }}</td>
 
                                 <!-- Kolom Judul Video -->
                                 <td class="px-4 py-3 text-sm text-gray-900">{{ $video->title }}</td>
@@ -84,6 +87,17 @@
                     <label for="video" class="block text-sm font-medium text-gray-700">Pilih Video</label>
                     <input type="file" name="video" id="video" accept="video/*"
                         class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
+                        required>
+                    <p class="mt-1 text-xs text-gray-500">* Maksimal ukuran video 100MB. Format yang didukung: MP4, AVI,
+                        MOV, WMV, WEBM,
+                        OGG.</p>
+                </div>
+
+                <!-- Input Keterangan Video -->
+                <div class="mb-4">
+                    <label for="ket_video" class="block text-sm font-medium text-gray-700">Keterangan Video</label>
+                    <input type="text" name="ket_video" id="ket_video" placeholder="Masukkan Keterangan Video"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                         required>
                 </div>
 
