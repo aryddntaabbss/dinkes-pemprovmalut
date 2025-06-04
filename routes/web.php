@@ -21,6 +21,7 @@ use App\Http\Controllers\{
     StrukturOrganisasiController
 };
 use App\Models\{DtaKesehatan, Informasi, Profil};
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
 // =========================
@@ -46,6 +47,7 @@ Route::get('/struktur-organisasi', [HomeController::class, 'struktur'])->name('p
 Route::get('/kontak', function () {
     return view('pages.kontak');
 })->name('kontak');
+Route::post('/contact', [ContactController::class, 'send'])->name('contact.send');
 
 // =========================
 // Authenticated Routes

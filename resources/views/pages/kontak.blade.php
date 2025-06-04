@@ -27,7 +27,7 @@
                 </div>
                 @endif
 
-                <form action="" method="POST">
+                <form action="{{ route('contact.send') }}" method="POST">
                     @csrf
 
                     <!-- Nama -->
