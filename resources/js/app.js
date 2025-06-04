@@ -3,6 +3,9 @@ import 'flowbite';
 import Swal from 'sweetalert2';
 import { DataTable } from 'simple-datatables';
 
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
+
 window.Swal = Swal;
 window.DataTable = DataTable;
 

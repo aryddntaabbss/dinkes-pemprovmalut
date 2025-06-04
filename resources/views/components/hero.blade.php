@@ -1,61 +1,86 @@
 <div class="relative isolate h-screen flex items-center justify-center">
-    <!-- Slideshow CSS -->
     <style>
-        .slideshow {
+        .slideshow-container {
             position: absolute;
             inset: 0;
             z-index: -1;
+        }
+
+        .slideshow {
+            position: absolute;
+            inset: 0;
             background-size: cover;
             background-position: center;
-            animation: fade 15s infinite;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            animation-fill-mode: forwards;
         }
 
         @keyframes fade {
             0% {
-                opacity: 1;
-            }
-
-            33% {
                 opacity: 0;
             }
 
-            66% {
+            10% {
+                opacity: 1;
+            }
+
+            45% {
+                opacity: 1;
+            }
+
+            55% {
                 opacity: 0;
             }
 
             100% {
-                opacity: 1;
+                opacity: 0;
             }
         }
 
-        .slideshow:nth-child(1) {
-            animation-delay: 0s;
+        /* Animasi untuk desktop slideshow */
+        .desktop-slideshow:nth-child(1) {
+            animation: fade 12s infinite;
         }
 
-        .slideshow:nth-child(2) {
-            animation-delay: 5s;
+        .desktop-slideshow:nth-child(2) {
+            animation: fade 12s infinite;
+            animation-delay: 6s;
         }
 
-        .slideshow:nth-child(3) {
-            animation-delay: 10s;
+        /* Animasi untuk mobile slideshow */
+        .mobile-slideshow:nth-child(1) {
+            animation: fade 12s infinite;
+        }
+
+        .mobile-slideshow:nth-child(2) {
+            animation: fade 12s infinite;
+            animation-delay: 6s;
         }
     </style>
 
-    <!-- Slideshow Background -->
-    <div class="slideshow" style="background-image: url('{{ asset('images/landscape-1.jpg') }}');"></div>
-    <div class="slideshow" style="background-image: url('{{ asset('images/landscape-2.jpg') }}');"></div>
-    <div class="slideshow" style="background-image: url('{{ asset('images/landscape-3.jpg') }}');"></div>
+    <div class="slideshow-container">
+        <!-- Desktop Slideshow: hanya tampil di md ke atas -->
+        <div class="slideshow desktop-slideshow hidden md:block"
+            style="background-image: url('{{ asset('images/landscape-1.jpg') }}')"></div>
+        <div class="slideshow desktop-slideshow hidden md:block"
+            style="background-image: url('{{ asset('images/landscape-2.jpg') }}')"></div>
 
-    <!-- Hero Content -->
-    <div class="relative px-6 text-center">
+        <!-- Mobile Slideshow: hanya tampil di bawah md -->
+        <div class="slideshow mobile-slideshow block md:hidden"
+            style="background-image: url('{{ asset('images/mobile-1.jpg') }}')"></div>
+        <div class="slideshow mobile-slideshow block md:hidden"
+            style="background-image: url('{{ asset('images/mobile-2.jpg') }}')"></div>
+    </div>
+
+    <div class="relative px-6 text-center p-5">
         <div class="mx-auto max-w-2xl">
-            <h1 class="text-4xl font-bold tracking-tight text-white sm:text-6xl drop-shadow-lg shadow-black">
-                Dinas Kesehatan Provinsi Maluku Utara
+            <h1 class="text-3xl font-extrabold tracking-tight text-white sm:text-4xl drop-shadow-lg">
+                Selamat Datang di Website
             </h1>
-            <p class="mt-8 text-lg text-white shad sm:text-xl drop-shadow-lg shadow-black">
-                Anim aute id magna aliqua ad ad non deserunt sunt. Qui irure qui lorem cupidatat commodo. Elit sunt amet
-                fugiat veniam occaecat.
-            </p>
+            <h2 class="text-2xl font-semibold tracking-tight text-white sm:text-3xl drop-shadow-lg mt-4">
+                Dinas Kesehatan Provinsi Maluku Utara
+            </h2>
         </div>
     </div>
 </div>

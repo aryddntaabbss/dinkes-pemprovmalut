@@ -12,6 +12,9 @@
 
         <title>{{ config('app.name', 'Laravel') }}</title>
 
+        <!-- Leaflet CSS -->
+        <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.bunny.net">
         <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
@@ -38,7 +41,7 @@
             /* Flexbox untuk memastikan footer selalu di bawah */
             body,
             html {
-                height: 100%;
+                height: auto;
                 margin: 0;
             }
 
@@ -133,6 +136,55 @@
             document.querySelector('main').classList.add('content-fade');
         }
         </script>
+
+        <!-- Leaflet JS -->
+        <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+        var map = L.map('map').setView([0.735016, 127.568350], 15);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        L.marker([0.735016, 127.568350]).addTo(map)
+            .bindPopup("<b>Kantor Dinas Kesehatan Provinsi Maluku Utara</b><br>Jl. Raya Sultan Nuku, Sofifi")
+            .openPopup();
+    });
+        </script>
+
+        <script>
+            const items = document.querySelectorAll('[data-carousel-item]');
+let current = 0;
+
+function showSlide(nextIndex, direction) {
+items.forEach((item, index) => {
+item.classList.remove('translate-x-0', 'translate-x-full', '-translate-x-full', 'z-20', 'z-10');
+
+if (index === current) {
+item.classList.add(direction === 'next' ? '-translate-x-full' : 'translate-x-full', 'z-10');
+} else if (index === nextIndex) {
+item.classList.add('translate-x-0', 'z-20');
+} else {
+item.classList.add(direction === 'next' ? 'translate-x-full' : '-translate-x-full', 'z-10');
+}
+});
+
+current = nextIndex;
+}
+
+document.querySelector('[data-carousel-next]').addEventListener('click', () => {
+const nextIndex = (current + 1) % items.length;
+showSlide(nextIndex, 'next');
+});
+
+document.querySelector('[data-carousel-prev]').addEventListener('click', () => {
+const prevIndex = (current - 1 + items.length) % items.length;
+showSlide(prevIndex, 'prev');
+});
+        </script>
+
     </body>
 
 </html>
